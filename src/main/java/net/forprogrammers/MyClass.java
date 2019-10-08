@@ -3,9 +3,6 @@ package net.forprogrammers;
 import java.util.List;
 import java.util.function.Predicate;
 
-/**
- * Created by Janusz Kacki on 08/10/2019. Project; bielmarcus
- */
 public class MyClass implements IMyClass {
 
     private List<IStudent> students;
