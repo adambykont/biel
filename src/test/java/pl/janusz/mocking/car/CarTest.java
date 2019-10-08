@@ -1,8 +1,9 @@
-package pl.janusz.mocking;
+package pl.janusz.mocking.car;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import pl.janusz.mocking.car.Car;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
