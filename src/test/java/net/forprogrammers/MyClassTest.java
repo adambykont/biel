@@ -1,6 +1,7 @@
 package net.forprogrammers;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -85,13 +86,7 @@ public class MyClassTest {
         assertThat(bySurname.getSurname(), is(equalTo(student.getSurname())));
     }
 
-    @Test
-    public void mocksAreNotNullAsInstances() {
-
-        assertThat(studentA, is(not(equalTo(null))));
-        assertThat(studentB, is(not(equalTo(null))));
-    }
-
+    @Ignore
     @Test
     public void shouldCreateStudents() {
 
@@ -106,6 +101,9 @@ public class MyClassTest {
         assertThat(students.get(1).getName(), is(sBName));
         assertThat(students.get(0).getSurname(), is(sASurname));
         assertThat(students.get(1).getSurname(), is(sBSurname));
+
+        assertThat(studentA, is(not(equalTo(null))));
+        assertThat(studentB, is(not(equalTo(null))));
     }
 
     @Test
