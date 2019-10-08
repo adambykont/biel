@@ -1,5 +1,6 @@
 package pl.janusz.lesson2;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,6 +10,10 @@ import static org.hamcrest.Matchers.*;
  * Created by Janusz Kacki on 08/10/2019. Project; bielmarcus
  */
 public class PersonTest {
+
+    private Person person1;
+    private Person person2;
+    private Person person3;
 
     @Test
     public void shouldReturnMarcus() {
