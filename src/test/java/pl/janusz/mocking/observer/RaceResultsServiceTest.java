@@ -51,13 +51,12 @@ public class RaceResultsServiceTest {
         sut.send(message);
 
         Mockito
-                .verify(clientA,Mockito.times(1))
+                .verify(clientA, Mockito.times(1))
                 .receive(message);
 
         Mockito
                 .verify(clientB, Mockito.times(0))
                 .receive(message);
-
     }
 
     @Test
