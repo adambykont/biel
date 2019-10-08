@@ -20,11 +20,11 @@ public class MyClass implements IMyClass {
         return getStudent(byName);
     }
 
-    private IStudent getStudent(Predicate<IStudent> byName) {
+    private IStudent getStudent(Predicate<IStudent> criterion) {
 
         return this.students
                 .stream()
-                .filter(byName)
+                .filter(criterion)
                 .findAny()
                 .orElse(null);
     }
