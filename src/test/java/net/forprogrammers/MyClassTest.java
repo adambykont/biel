@@ -1,7 +1,6 @@
 package net.forprogrammers;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -25,11 +24,9 @@ public class MyClassTest {
     public static IStudent student;
 
     private static String sAName = "Adam";
-    ;
     private static String sBName = "Barbara";
     private static String sASurname = "Ant";
     private static String sBSurname = "Brown";
-    ;
     private static IStudent studentA = Mockito.mock(IStudent.class);
     private static IStudent studentB = Mockito.mock(IStudent.class);
 
