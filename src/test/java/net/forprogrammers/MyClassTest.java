@@ -86,7 +86,7 @@ public class MyClassTest {
         assertThat(bySurname.getSurname(), is(equalTo(student.getSurname())));
     }
 
-    @Ignore
+//    @Ignore
     @Test
     public void shouldCreateStudents() {
 
