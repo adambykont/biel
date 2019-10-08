@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -28,16 +29,15 @@ public class MyClassTest {
     private IStudent studentB;
     private MyClass sut;
     private ICreateStudent createStudent;
-    private List<IStudent> students;
 
     @Before
     public void setUp() throws Exception {
 
-        students = Arrays.asList(studentA, studentB);
-
         createStudent = Mockito.mock(ICreateStudent.class);
         studentA = Mockito.mock(IStudent.class);
         studentB = Mockito.mock(IStudent.class);
+
+        List<IStudent> students = Arrays.asList(studentA, studentB);
 
         sAName = "Adam";
         sBName = "Barbara";
@@ -65,4 +65,50 @@ public class MyClassTest {
 
         sut = new MyClass(createStudent);
     }
-}
+
+    @Test
+    public void mocksAreNotNullAsInstances() {
+
+        assertThat(studentA, is(not(equalTo(null))));
+        assertThat(studentB, is(not(equalTo(null))));
+    }
+
+    @Test
+    public void shouldCreateStudents() {
+
+        Mockito
+                .verify(createStudent, Mockito.times(1))
+                .getStudents();
+
+        List<IStudent> students = createStudent.getStudents();
+        assertThat(students.size(), is(2));
+
+        assertThat(students.get(0).getName(), is(sAName));
+        assertThat(students.get(1).getName(), is(sBName));
+        assertThat(students.get(0).getSurname(), is(sASurname));
+        assertThat(students.get(1).getSurname(), is(sBSurname));
+    }
+
+    @Test
+    public void shouldFindByName() {
+
+        IStudent byName = sut.findByName(sAName);
+        assertThat(byName.getName(), is(equalTo(sAName)));
+    }
+
+    @Test
+    public void shouldFindBySurname() {
+
+        IStudent bySurname = sut.findBySurname(sASurname);
+        assertThat(bySurname.getSurname(),is(sASurname));
+    }
+
+    @Test
+    public void shouldReturnNullWhenStudentDoesntExist() {
+
+        IStudent byName = sut.findByName("Joe");
+        assertThat(byName,is(equalTo(null)));
+
+        IStudent bySurname = sut.findBySurname("Doe");
+        assertThat(bySurname, is(equalTo(null)));
+    }}
