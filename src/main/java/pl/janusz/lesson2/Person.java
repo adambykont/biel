@@ -13,4 +13,9 @@ public class Person {
 
         return "Hello World";
     }
+
+    public Name getPersonName() {
+
+        return personName;
+    }
 }
