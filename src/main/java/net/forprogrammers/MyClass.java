@@ -20,15 +20,6 @@ public class MyClass implements IMyClass {
         return getStudent(byName);
     }
 
-    private IStudent getStudent(Predicate<IStudent> criterion) {
-
-        return this.students
-                .stream()
-                .filter(criterion)
-                .findAny()
-                .orElse(null);
-    }
-
     @Override
     public IStudent findBySurname(String surname) {
 
@@ -41,5 +32,14 @@ public class MyClass implements IMyClass {
     public int count() {
 
         return students.size();
+    }
+
+    private IStudent getStudent(Predicate<IStudent> criterion) {
+
+        return this.students
+                .stream()
+                .filter(criterion)
+                .findAny()
+                .orElse(null);
     }
 }
