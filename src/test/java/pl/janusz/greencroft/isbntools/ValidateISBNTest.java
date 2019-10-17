@@ -21,66 +21,12 @@ public class ValidateISBNTest {
     }
 
     @Test
-    public void shouldCheckAnotherValidISBN() {
+    public void checkValidISBN() {
 
-        String validISBN = "0140177396";
-
-        boolean result = validator.checkISBN(validISBN);
-
-        assertThat("0140177396 should be validated", result, is(true));
-    }
-
-    @Test
-    public void shouldCheckValidISBN() {
-
-        String validISBN = "0306406152";
-        boolean result = validator.checkISBN(validISBN);
-
-        assertThat("01404491116 shoould be validated", result, is(true));
-    }
-
-    @Test
-    public void shouldNotPassInvalidISBNNumber() {
-
-        String invalidISBN = "1234567890";
-        boolean result = validator.checkISBN(invalidISBN);
-
-        assertThat("01404491117 should'nt be validated", result, is(false));
-    }
-
-    @Test
-    public void shouldNotValidateNon10digitsISBNsAndThrowExceptions() {
-
-        String invalidISBN = "123456789";
-
-        try {
-            boolean result = validator.checkISBN(invalidISBN);
-            fail();
-        } catch (Exception e) {
-            assertThat(e, instanceOf(NumberFormatException.class));
-        }
-    }
-
-    @Test
-    public void shouldValidateWihXOnTheLastPosition() {
-
-        String validISBN = "012000030X";
-
+        int validISBN = 1404491116;
         boolean result = validator.checkISBN(validISBN);
 
         assertThat(result, is(true));
-    }
-
-    @Test
-    public void nonDigitStringShouldThrowException() {
-
-        String invalidISBN = "X123456789";
-
-        try {
-            boolean result = validator.checkISBN(invalidISBN);
-            fail();
-        } catch (Exception e) {
-            assertThat(e, instanceOf(IllegalArgumentException.class));
-        }
+        assertTrue(result);
     }
 }
