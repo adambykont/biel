@@ -21,12 +21,30 @@ public class ValidateISBNTest {
     }
 
     @Test
-    public void checkValidISBN() {
+    public void shouldCheckAnotherValidISBN() {
+
+        int validISBN = 140177396;
+
+        boolean result = validator.checkISBN(validISBN);
+
+        assertThat("140177396 should be validated", result, is(true));
+    }
+
+    @Test
+    public void shouldCheckValidISBN() {
 
         int validISBN = 1404491116;
         boolean result = validator.checkISBN(validISBN);
 
-        assertThat(result, is(true));
-        assertTrue(result);
+        assertThat("1404491116 shoould be validated", result, is(true));
+    }
+
+    @Test
+    public void shouldNotPassInvalidISBNNumber() {
+
+        int invalidISBN = 1404491117;
+        boolean result = validator.checkISBN(invalidISBN);
+
+        assertThat("1404491117 should'nt be validated", result, is(false));
     }
 }
