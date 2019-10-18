@@ -17,24 +17,30 @@ public class StockManagerTest {
 
     private String isbn;
     private StockManager stockManager;
+    private String validResponse;
 
     @Test
     public void shouldUseDatabaseIfDataIsPresent() {
 
-        fail();
+        ExternalISBNDataService mockDatabase = Mockito.mock(ExternalISBNDataService.class);
+        stockManager.setDatabase(mockDatabase);
+        String locatorCode = stockManager.getLocatorCode(isbn);
+
+        assertThat(locatorCode, is(equalTo(validResponse)));
     }
 
     @Test
     public void shouldUseWebServiceIfDataIsNotPresent() {
 
-        fail();
+        ExternalISBNDataService mockWebService = Mockito.mock(ExternalISBNDataService.class);
     }
 
     @Before
     public void setUp() throws Exception {
 
         isbn = "0140177396";
-        
+        validResponse = "7396J4";
+
         stockManager = new StockManager();
 
         webService = new ExternalISBNDataService() {
@@ -55,8 +61,8 @@ public class StockManagerTest {
             }
         };
 
-        stockManager.setDatabase(database);
-        stockManager.setWebService(webService);
+//        stockManager.setDatabase(database);
+//        stockManager.setWebService(webService);
     }
 
     @Test
@@ -64,6 +70,6 @@ public class StockManagerTest {
 
         String locatorCode = stockManager.getLocatorCode(isbn);
 
-        assertThat(locatorCode, is(equalTo("7396J4")));
+        assertThat(locatorCode, is(equalTo(validResponse)));
     }
 }
