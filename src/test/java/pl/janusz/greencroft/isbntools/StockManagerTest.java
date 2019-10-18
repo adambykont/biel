@@ -12,17 +12,32 @@ import static org.hamcrest.Matchers.*;
  */
 public class StockManagerTest {
 
-    private ExternalISBNDataService service;
+    private ExternalISBNDataService webService;
+    private ExternalISBNDataService database;
 
     private String isbn;
     private StockManager stockManager;
+
+    @Test
+    public void shouldUseDatabaseIfDataIsPresent() {
+
+        fail();
+    }
+
+    @Test
+    public void shouldUseWebServiceIfDataIsNotPresent() {
+
+        fail();
+    }
 
     @Before
     public void setUp() throws Exception {
 
         isbn = "0140177396";
+        
         stockManager = new StockManager();
-        service = new ExternalISBNDataService() {
+
+        webService = new ExternalISBNDataService() {
 
             @Override
             public Book lookup(String isbn) {
@@ -31,7 +46,17 @@ public class StockManagerTest {
             }
         };
 
-        stockManager.setService(service);
+        database = new ExternalISBNDataService() {
+
+            @Override
+            public Book lookup(String isbn) {
+
+                return null;
+            }
+        };
+
+        stockManager.setDatabase(database);
+        stockManager.setWebService(webService);
     }
 
     @Test

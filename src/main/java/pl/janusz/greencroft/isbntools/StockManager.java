@@ -5,17 +5,26 @@ package pl.janusz.greencroft.isbntools;
  */
 public class StockManager {
 
-    private ExternalISBNDataService service;
+    private ExternalISBNDataService webService;
+    private ExternalISBNDataService database;
 
-    public void setService(ExternalISBNDataService service) {
+    public void setWebService(ExternalISBNDataService webService) {
 
-        this.service = service;
+        this.webService = webService;
+    }
+
+    public void setDatabase(ExternalISBNDataService database) {
+                                                    
+        this.database = database;
     }
 
     public String getLocatorCode(String isbn) {
 
-        Book book = service.lookup(isbn);
-
+        Book book = database.lookup(isbn);
+        if (book == null) {
+            book = webService.lookup(isbn);
+        }
+        
         String author = book.getAuthor();
         String isbnStr = book.getIsbn();
         String title = book.getTitle();
