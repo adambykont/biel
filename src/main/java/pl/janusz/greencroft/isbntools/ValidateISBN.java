@@ -5,20 +5,16 @@ package pl.janusz.greencroft.isbntools;
  */
 public class ValidateISBN {
 
-    public boolean checkISBN(String isbn) {
+    private static final int TEN_DIGITS = 10;
+    private static final int THIRTEEN_DIGITS = 13;
 
-        if (isbn == null) {
-            throw new NumberFormatException("non 10 or 13 digits ISBN");
-        }
+    private boolean checkISBN(String isbn) {
 
-        if (!(isbn.length() == 10 || isbn.length() == 13)) {
+        checkFormat(isbn);
 
-            throw new NumberFormatException("non 10 or 13 digits ISBN");
-        }
+        boolean result;
 
-        boolean result = false;
-
-        if (isbn.length() == 10) {
+        if (isbn.length() == TEN_DIGITS) {
             result = tenDigitsCheck(isbn);
         } else {
             result = thirteenDigitsCheck(isbn);
@@ -27,16 +23,32 @@ public class ValidateISBN {
         return result;
     }
 
-    private boolean thirteenDigitsCheck(String isbn) {
+    private void checkFormat(String isbn) {
 
-        if (!isbn.matches("^[0-9]{12}[0-9X]$")) {
+        if (isbn == null) {
+            throw new NumberFormatException("non 10 or 13 digits ISBN");
+        }
+
+        if (!(isbn.length() == TEN_DIGITS || isbn.length() == THIRTEEN_DIGITS)) {
+
+            throw new NumberFormatException("non 10 or 13 digits ISBN");
+        }
+
+        if (isbn.length() == TEN_DIGITS && !isbn.matches("^[0-9]{9}[0-9X]$")) {
             throw new IllegalArgumentException(" Non digit ISBN");
         }
+
+        if (isbn.length() == THIRTEEN_DIGITS && !isbn.matches("^[0-9]{12}[0-9X]$")) {
+            throw new IllegalArgumentException(" Non digit ISBN");
+        }
+    }
+
+    private boolean thirteenDigitsCheck(String isbn) {
 
         int sumSoFar = 0;
         int digit;
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < THIRTEEN_DIGITS; i++) {
             digit = Integer.parseInt(String.valueOf(isbn.charAt(i)));
             if (i % 2 == 0) {
                 sumSoFar += digit;
@@ -45,16 +57,10 @@ public class ValidateISBN {
             }
         }
 
-
-
-        return sumSoFar % 10 == 0;
+        return sumSoFar % TEN_DIGITS == 0;
     }
 
     private boolean tenDigitsCheck(String isbn) {
-
-        if (!isbn.matches("^[0-9]{9}[0-9X]$")) {
-            throw new IllegalArgumentException(" Non digit ISBN");
-        }
 
         int sumSoFar = 0;
         int digit;
@@ -62,12 +68,12 @@ public class ValidateISBN {
 
         for (int i = 0; i < 9; i++) {
             digit = Integer.parseInt(String.valueOf(isbn.charAt(i)));
-            weight = 10 - i;
+            weight = TEN_DIGITS - i;
             sumSoFar += digit * weight;
         }
 
         if (isbn.charAt(9) == 'X') {
-            sumSoFar += 10;
+            sumSoFar += TEN_DIGITS;
         } else {
             sumSoFar += Integer.parseInt(String.valueOf(isbn.charAt(9)));
         }
