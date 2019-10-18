@@ -5,16 +5,16 @@ package pl.janusz.greencroft.isbntools;
  */
 public class ValidateISBN {
 
-    private static final int TEN_DIGITS = 10;
-    private static final int THIRTEEN_DIGITS = 13;
+    private static final int SHORT_ISBN = 10;
+    private static final int LONG_ISBN = 13;
 
-    private boolean checkISBN(String isbn) {
+    public boolean checkISBN(String isbn) {
 
         checkFormat(isbn);
 
         boolean result;
 
-        if (isbn.length() == TEN_DIGITS) {
+        if (isbn.length() == SHORT_ISBN) {
             result = tenDigitsCheck(isbn);
         } else {
             result = thirteenDigitsCheck(isbn);
@@ -29,16 +29,16 @@ public class ValidateISBN {
             throw new NumberFormatException("non 10 or 13 digits ISBN");
         }
 
-        if (!(isbn.length() == TEN_DIGITS || isbn.length() == THIRTEEN_DIGITS)) {
+        if (!(isbn.length() == SHORT_ISBN || isbn.length() == LONG_ISBN)) {
 
             throw new NumberFormatException("non 10 or 13 digits ISBN");
         }
 
-        if (isbn.length() == TEN_DIGITS && !isbn.matches("^[0-9]{9}[0-9X]$")) {
+        if (isbn.length() == SHORT_ISBN && !isbn.matches("^[0-9]{9}[0-9X]$")) {
             throw new IllegalArgumentException(" Non digit ISBN");
         }
 
-        if (isbn.length() == THIRTEEN_DIGITS && !isbn.matches("^[0-9]{12}[0-9X]$")) {
+        if (isbn.length() == LONG_ISBN && !isbn.matches("^[0-9]{12}[0-9X]$")) {
             throw new IllegalArgumentException(" Non digit ISBN");
         }
     }
@@ -48,7 +48,7 @@ public class ValidateISBN {
         int sumSoFar = 0;
         int digit;
 
-        for (int i = 0; i < THIRTEEN_DIGITS; i++) {
+        for (int i = 0; i < LONG_ISBN; i++) {
             digit = Integer.parseInt(String.valueOf(isbn.charAt(i)));
             if (i % 2 == 0) {
                 sumSoFar += digit;
@@ -57,7 +57,7 @@ public class ValidateISBN {
             }
         }
 
-        return sumSoFar % TEN_DIGITS == 0;
+        return sumSoFar % SHORT_ISBN == 0;
     }
 
     private boolean tenDigitsCheck(String isbn) {
@@ -68,12 +68,12 @@ public class ValidateISBN {
 
         for (int i = 0; i < 9; i++) {
             digit = Integer.parseInt(String.valueOf(isbn.charAt(i)));
-            weight = TEN_DIGITS - i;
+            weight = SHORT_ISBN - i;
             sumSoFar += digit * weight;
         }
 
         if (isbn.charAt(9) == 'X') {
-            sumSoFar += TEN_DIGITS;
+            sumSoFar += SHORT_ISBN;
         } else {
             sumSoFar += Integer.parseInt(String.valueOf(isbn.charAt(9)));
         }
