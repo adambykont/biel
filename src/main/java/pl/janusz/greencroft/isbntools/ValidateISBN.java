@@ -57,7 +57,7 @@ public class ValidateISBN {
             }
         }
 
-        return sumSoFar % SHORT_ISBN == 0;
+        return sumSoFar % 10 == 0;
     }
 
     private boolean tenDigitsCheck(String isbn) {
@@ -66,14 +66,14 @@ public class ValidateISBN {
         int digit;
         int weight;
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < SHORT_ISBN - 1; i++) {
             digit = Integer.parseInt(String.valueOf(isbn.charAt(i)));
-            weight = SHORT_ISBN - i;
+            weight = 10 - i;
             sumSoFar += digit * weight;
         }
 
         if (isbn.charAt(9) == 'X') {
-            sumSoFar += SHORT_ISBN;
+            sumSoFar += 10;
         } else {
             sumSoFar += Integer.parseInt(String.valueOf(isbn.charAt(9)));
         }
