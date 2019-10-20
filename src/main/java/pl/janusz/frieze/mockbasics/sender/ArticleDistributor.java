@@ -6,6 +6,9 @@ package pl.janusz.frieze.mockbasics.sender;
 
 import pl.janusz.frieze.mockbasics.article.Article;
 import pl.janusz.frieze.mockbasics.client.Channel;
+import pl.janusz.frieze.mockbasics.client.EntertainmentChannel;
+import pl.janusz.frieze.mockbasics.client.OtherChannel;
+import pl.janusz.frieze.mockbasics.client.SportChannel;
 import pl.janusz.frieze.mockbasics.dtabase.ArticleDataAccess;
 
 /**
@@ -13,12 +16,15 @@ import pl.janusz.frieze.mockbasics.dtabase.ArticleDataAccess;
  */
 public class ArticleDistributor {
 
-    private final Channel sport;
-    private final Channel entertainment;
-    private final Channel other;
+    private final SportChannel sport;
+    private final EntertainmentChannel entertainment;
+    private final OtherChannel other;
     private final ArticleDataAccess dataAccess;
 
-    public ArticleDistributor(Channel sport, Channel entertainment, Channel other, ArticleDataAccess dataAccess) {
+    public ArticleDistributor(SportChannel sport,
+                              EntertainmentChannel entertainment,
+                              OtherChannel other,
+                              ArticleDataAccess dataAccess) {
 
         this.sport = sport;
         this.entertainment = entertainment;
