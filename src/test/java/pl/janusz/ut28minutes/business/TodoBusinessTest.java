@@ -1,4 +1,4 @@
-package pl.janusz.ut28minutes;
+package pl.janusz.ut28minutes.business;
 
 import org.junit.Test;
 import org.mockito.Mockito;
