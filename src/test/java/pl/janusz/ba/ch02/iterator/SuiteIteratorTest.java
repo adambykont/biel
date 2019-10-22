@@ -1,4 +1,4 @@
-package pl.janusz.ba.ch02;
+package pl.janusz.ba.ch02.iterator;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

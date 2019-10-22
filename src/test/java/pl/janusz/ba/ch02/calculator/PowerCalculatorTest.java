@@ -1,10 +1,10 @@
-package pl.janusz.ba.ch02;
+package pl.janusz.ba.ch02.calculator;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.mockito.Mockito;
+import pl.janusz.ba.ch02.calculator.PowerCalculator;
 
 import java.util.Arrays;
 import java.util.Collection;

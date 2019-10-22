@@ -1,7 +1,8 @@
-package pl.janusz.ba.ch02;
+package pl.janusz.ba.ch02.iterator;
 
 import org.junit.Test;
-import org.mockito.Mockito;
+import pl.janusz.ba.ch02.iterator.ArrayIterator;
+import pl.janusz.ba.ch02.iterator.IteratorOutOfBoundsException;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
