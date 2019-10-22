@@ -1,18 +1,13 @@
 package pl.janusz.ut28minutes.business;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import pl.janusz.ut28minutes.data.api.TodoService;
 import pl.janusz.ut28minutes.data.api.TodoServiceStub;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +23,7 @@ public class TodoBusinessStubTest {
         TodoBusiness todoBusiness = new TodoBusiness(stub);
 
 //        when
-        final List<String> related = todoBusiness.retrieveTodosRelatedToStrint("Dummy");
+        final List<String> related = todoBusiness.retrieveTodosRelatedToSpring("Dummy");
 
 //        then
         assertThat(related, hasItems("Learn Spring MVC", "Learn Spring"));

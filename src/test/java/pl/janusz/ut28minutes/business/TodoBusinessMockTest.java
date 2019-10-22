@@ -2,11 +2,12 @@ package pl.janusz.ut28minutes.business;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import pl.janusz.ut28minutes.data.api.TodoService;
-import pl.janusz.ut28minutes.data.api.TodoServiceStub;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,11 +20,15 @@ import static org.junit.Assert.assertThat;
  */
 public class TodoBusinessMockTest {
 
-    @Test
-    public void shouldRetrieveStringRelatedTodosUsingMock() {
+    private TodoService mock;
+    private TodoBusiness sut;
+    private String dummy;
 
-//        given
-        final TodoService mock = Mockito.mock(TodoService.class);
+    @Before
+    public void setUp() throws Exception {
+
+        //        given
+        mock = Mockito.mock(TodoService.class);
         Mockito
                 .when(mock.retrieveTodos(Mockito.anyString()))
                 .thenAnswer(new Answer<List<String>>() {
@@ -31,14 +36,68 @@ public class TodoBusinessMockTest {
                     @Override
                     public List<String> answer(InvocationOnMock invocationOnMock) throws Throwable {
 
-                        return Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to Dance");
+                        return Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to Dance", "Learn to Sing");
                     }
                 });
-        TodoBusiness sut = new TodoBusiness(mock);
+
+        sut = new TodoBusiness(mock);
+        dummy = "Dummy";
+    }
+
+    @Test
+    public void shouldDeleteTodosnotRelatedToSpring() {
+
+        sut.deleteTodosNotRelatedToSpring(dummy);
+        Mockito
+                .verify(mock, Mockito.times(2))
+                .deleteTodo(Mockito.anyString());
+    }
+
+    @Test
+    public void shouldNeverRunDeleteOnSpringTodosWhenRemovingNonSpringTodos() {
+
+        sut.deleteTodosNotRelatedToSpring(dummy);
+
+        Mockito
+                .verify(mock, Mockito.never())
+                .deleteTodo("Learn Spring MVC");
+
+        Mockito
+                .verify(mock, Mockito.never())
+                .deleteTodo("Learn Spring");
+    }
+
+    @Test
+    public void shouldDeleteLearnToDanceAndLearnSingA() {
+
+        final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+        sut.deleteTodosNotRelatedToSpring(dummy);
+
+        Mockito
+                .verify(mock, Mockito.atLeast(1))
+                .deleteTodo(captor.capture());
+
+        final List<String> allValues = captor.getAllValues();
+        assertThat(allValues.get(0), is(equalTo("Learn to Dance")));
+        assertThat(allValues.get(1), is(equalTo("Learn to Sing")));
+    }
+
+    @Test
+    public void shouldCallDeleteOnDanceTodoWhenremovingNonSpringTodos() {
+
+        sut.deleteTodosNotRelatedToSpring(dummy);
+
+        Mockito
+                .verify(mock)
+                .deleteTodo("Learn to Dance");
+    }
+
+    @Test
+    public void shouldRetrieveStringRelatedTodosUsingMock() {
 
 //        when
-        final String dummy = "Dummy";
-        final List<String> retrievedTodos = sut.retrieveTodosRelatedToStrint(dummy);
+        final List<String> retrievedTodos = sut.retrieveTodosRelatedToSpring(dummy);
 
 //        then
         Mockito
