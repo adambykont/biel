@@ -31,7 +31,13 @@ public class TodoBusinessTest {
 
         final List<String> related = todoBusiness.retrieveTodosRelatedToStrint("Dummy");
         assertThat(related, hasItems("Learn Spring MVC", "Learn Spring"));
-        assertThat(related,hasSize(2));
+        assertThat(related, hasSize(2));
         assertThat(related, not(hasItem("Learn to Dance")));
+    }
+
+    @Test
+    public void shouldRetrieveStringRelatedTodosUsingMock() {
+        
+
     }
 }
