@@ -1,4 +1,4 @@
-package pl.janusz.buchalka.pt03;
+package pl.janusz.buchalka.java.pt03;
 
 /**
  * Created by Janusz Kacki on 23/10/2019. Project; bielmarcus
