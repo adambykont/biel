@@ -37,9 +37,9 @@ public class BubbleSortTest {
         Arrays.sort(sortedOne);
         Integer[] sortedTwo = sortedOne.clone();
 
-        BubbleSort.sort(unsortedOne);
+        BubbleSort.sort(sortedOne);
 
-        assertThat(unsortedOne, is(arrayContaining(sortedTwo)));
+        assertThat(sortedOne, is(arrayContaining(sortedTwo)));
     }
 
     @Test
