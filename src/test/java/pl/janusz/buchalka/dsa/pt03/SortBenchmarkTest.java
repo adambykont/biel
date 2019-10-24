@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by Janusz Kacki on 24/10/2019. Project; bielmarcus
  */
 @State(Scope.Thread)
-public class SelectionSortBenchmarkTest {
+public class SortBenchmarkTest {
 
     @Param({"1000", "10000", "100000"})
     public int dataSize;
@@ -19,13 +19,11 @@ public class SelectionSortBenchmarkTest {
     @Setup
     public void setUp() {
 
-        System.out.println("Preparing");
         array = new Integer[dataSize];
 
         for (int i = 0; i < dataSize; i++) {
             array[i] = ThreadLocalRandom.current().nextInt();
         }
-        System.out.println("Prepared");
     }
 
     @Benchmark
