@@ -19,7 +19,7 @@ public class SortJDKBenchmark {
     @Setup
     public void setup() {
 
-        array = new Integer[arraySize]
+        array = new Integer[arraySize];
         for (int i = 0; i < arraySize; i++) {
             array[i] = ThreadLocalRandom.current().nextInt();
         }
