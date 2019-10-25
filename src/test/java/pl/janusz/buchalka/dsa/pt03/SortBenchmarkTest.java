@@ -86,7 +86,7 @@ public class SortBenchmarkTest {
     @Fork(1)
     public void jdkparallelsort(Blackhole blackhole) {
 
-        JDKParellelSort.sort(array);
+        JDKParallelSort.sort(array);
         blackhole.consume(array);
     }
 

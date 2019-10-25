@@ -2,7 +2,6 @@ package pl.janusz.buchalka.dsa.pt03;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.util.Arrays;
 
@@ -12,7 +11,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * Created by Janusz Kacki on 25/10/2019. Project; bielmarcus
  */
-public class JDKParellelSortTest {
+public class JDKParallelSortTest {
     private Integer[] unsortedNumbers;
     private Integer[] sortedNumbers;
 
@@ -23,7 +22,7 @@ public class JDKParellelSortTest {
         Integer[] sortedOne = unsortedOne.clone();
         Arrays.sort(sortedOne);
 
-        JDKParellelSort.sort(unsortedOne);
+        JDKParallelSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -34,7 +33,7 @@ public class JDKParellelSortTest {
         Integer[] unsortedOne = new Integer[]{4, 3, 2, 1};
         Integer[] sortedOne = new Integer[]{1, 2, 3, 4};
 
-        JDKParellelSort.sort(unsortedOne);
+        JDKParallelSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -47,7 +46,7 @@ public class JDKParellelSortTest {
         Arrays.sort(sortedOne);
         Integer[] sortedTwo = sortedOne.clone();
 
-        JDKParellelSort.sort(sortedOne);
+        JDKParallelSort.sort(sortedOne);
 
         assertThat(sortedOne, is(arrayContaining(sortedTwo)));
     }
@@ -58,7 +57,7 @@ public class JDKParellelSortTest {
         Integer[] unsortedOne = new Integer[]{7};
         Integer[] sortedOne = new Integer[]{7};
 
-        JDKParellelSort.sort(unsortedOne);
+        JDKParallelSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -69,7 +68,7 @@ public class JDKParellelSortTest {
         Integer[] unsortedOne = new Integer[]{7, 4};
         Integer[] sortedOne = new Integer[]{4, 7};
 
-        JDKParellelSort.sort(unsortedOne);
+        JDKParallelSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -80,7 +79,7 @@ public class JDKParellelSortTest {
         Integer[] unsortedOne = new Integer[]{4, 7};
         Integer[] sortedOne = new Integer[]{4, 7};
 
-        JDKParellelSort.sort(unsortedOne);
+        JDKParallelSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -91,7 +90,7 @@ public class JDKParellelSortTest {
         Integer[] unsortedOne = new Integer[]{7, 4, 5};
         Integer[] sortedOne = new Integer[]{4, 5, 7};
 
-        JDKParellelSort.sort(unsortedOne);
+        JDKParallelSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -102,7 +101,7 @@ public class JDKParellelSortTest {
         Integer[] unsortedOne = new Integer[]{4, 5, 7};
         Integer[] sortedOne = new Integer[]{4, 5, 7};
 
-        JDKParellelSort.sort(unsortedOne);
+        JDKParallelSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -118,7 +117,7 @@ public class JDKParellelSortTest {
     @Test
     public void shouldSort() {
 
-        JDKParellelSort.sort(unsortedNumbers);
+        JDKParallelSort.sort(unsortedNumbers);
 
         assertThat(unsortedNumbers, is(arrayContaining(sortedNumbers)));
     }

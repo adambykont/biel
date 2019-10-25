@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Created by Janusz Kacki on 25/10/2019. Project; bielmarcus
  */
-public class JDKParellelSort {
+public class JDKParallelSort {
 
     public static void sort(Integer[] array) {
 
