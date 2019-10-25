@@ -30,6 +30,17 @@ public class MergeSortTest {
     }
 
     @Test
+    public void shouldsortReversedData() {
+
+        Integer[] unsortedOne = new Integer[]{4, 3, 2, 1};
+        Integer[] sortedOne = new Integer[]{1, 2, 3, 4};
+
+        MergeSort.sort(unsortedOne);
+
+        assertThat(unsortedOne, is(arrayContaining(sortedOne)));
+    }
+
+    @Test
     public void shuldSortAlreadySortedManualExample() {
 
         Integer[] unsortedOne = new Integer[]{20, 25, -15, 7, 55, 1, -22};

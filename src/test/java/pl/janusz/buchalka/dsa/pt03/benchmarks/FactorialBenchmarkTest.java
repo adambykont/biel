@@ -1,12 +1,7 @@
-package pl.janusz.buchalka.dsa.pt03;
+package pl.janusz.buchalka.dsa.pt03.benchmarks;
 
-import org.junit.Test;
-import org.mockito.Mockito;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
 @State(Scope.Thread)
 public class FactorialBenchmarkTest {

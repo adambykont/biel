@@ -28,6 +28,18 @@ public class SelectionSortTest {
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
+
+    @Test
+    public void shouldsortReversedData() {
+
+        Integer[] unsortedOne = new Integer[]{4, 3, 2, 1};
+        Integer[] sortedOne = new Integer[]{1, 2, 3, 4};
+
+        SelectionSort.sort(unsortedOne);
+
+        assertThat(unsortedOne, is(arrayContaining(sortedOne)));
+    }
+
     @Test
     public void shuldSortAlreadySortedManualExample() {
 
@@ -111,5 +123,4 @@ public class SelectionSortTest {
 
         assertThat(unsortedNumbers, is(arrayContaining(sortedNumbers)));
     }
-
 }

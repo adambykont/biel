@@ -65,9 +65,18 @@ public class SortBenchmarkTest {
     @Benchmark
     @Warmup(iterations = 0)
     @Fork(1)
-    public void measureMergesort(Blackhole blackhole) {
+    public void mergesort(Blackhole blackhole) {
 
         MergeSort.sort(array);
+        blackhole.consume(array);
+    }
+
+    @Benchmark
+    @Warmup(iterations = 0)
+    @Fork(1)
+    public void quicksort(Blackhole blackhole) {
+
+        QuickSort.sort(array);
         blackhole.consume(array);
     }
 }

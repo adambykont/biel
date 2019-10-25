@@ -10,9 +10,9 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
 /**
- * Created by Janusz Kacki on 24/10/2019. Project; bielmarcus
+ * Created by Janusz Kacki on 25/10/2019. Project; bielmarcus
  */
-public class InsertionSortTest {
+public class QuickSortTest {
 
     private Integer[] unsortedNumbers;
     private Integer[] sortedNumbers;
@@ -24,18 +24,7 @@ public class InsertionSortTest {
         Integer[] sortedOne = unsortedOne.clone();
         Arrays.sort(sortedOne);
 
-        InsertionSort.sort(unsortedOne);
-
-        assertThat(unsortedOne, is(arrayContaining(sortedOne)));
-    }
-
-    @Test
-    public void shouldsortReversedData() {
-
-        Integer[] unsortedOne = new Integer[]{4, 3, 2, 1};
-        Integer[] sortedOne = new Integer[]{1, 2, 3, 4};
-
-        InsertionSort.sort(unsortedOne);
+        QuickSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -48,7 +37,7 @@ public class InsertionSortTest {
         Arrays.sort(sortedOne);
         Integer[] sortedTwo = sortedOne.clone();
 
-        InsertionSort.sort(sortedOne);
+        QuickSort.sort(sortedOne);
 
         assertThat(sortedOne, is(arrayContaining(sortedTwo)));
     }
@@ -59,7 +48,7 @@ public class InsertionSortTest {
         Integer[] unsortedOne = new Integer[]{7};
         Integer[] sortedOne = new Integer[]{7};
 
-        InsertionSort.sort(unsortedOne);
+        QuickSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -70,7 +59,7 @@ public class InsertionSortTest {
         Integer[] unsortedOne = new Integer[]{7, 4};
         Integer[] sortedOne = new Integer[]{4, 7};
 
-        InsertionSort.sort(unsortedOne);
+        QuickSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -81,7 +70,7 @@ public class InsertionSortTest {
         Integer[] unsortedOne = new Integer[]{4, 7};
         Integer[] sortedOne = new Integer[]{4, 7};
 
-        InsertionSort.sort(unsortedOne);
+        QuickSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -92,7 +81,7 @@ public class InsertionSortTest {
         Integer[] unsortedOne = new Integer[]{7, 4, 5};
         Integer[] sortedOne = new Integer[]{4, 5, 7};
 
-        InsertionSort.sort(unsortedOne);
+        QuickSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -103,7 +92,18 @@ public class InsertionSortTest {
         Integer[] unsortedOne = new Integer[]{4, 5, 7};
         Integer[] sortedOne = new Integer[]{4, 5, 7};
 
-        InsertionSort.sort(unsortedOne);
+        QuickSort.sort(unsortedOne);
+
+        assertThat(unsortedOne, is(arrayContaining(sortedOne)));
+    }
+
+    @Test
+    public void shouldsortReversedData() {
+
+        Integer[] unsortedOne = new Integer[]{4, 3, 2, 1};
+        Integer[] sortedOne = new Integer[]{1, 2, 3, 4};
+
+        QuickSort.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
     }
@@ -119,7 +119,7 @@ public class InsertionSortTest {
     @Test
     public void shouldSort() {
 
-        InsertionSort.sort(unsortedNumbers);
+        QuickSort.sort(unsortedNumbers);
 
         assertThat(unsortedNumbers, is(arrayContaining(sortedNumbers)));
     }

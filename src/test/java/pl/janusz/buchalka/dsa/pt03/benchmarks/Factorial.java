@@ -1,4 +1,4 @@
-package pl.janusz.buchalka.dsa.pt03;
+package pl.janusz.buchalka.dsa.pt03.benchmarks;
 
 /**
  * Created by Janusz Kacki on 24/10/2019. Project; bielmarcus
