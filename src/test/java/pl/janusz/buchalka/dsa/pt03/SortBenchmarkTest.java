@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @State(Scope.Thread)
 public class SortBenchmarkTest {
 
-    @Param({"1000", "10000", "100000"})
+    @Param({"10", "1000", "100000"})
     public int dataSize;
 
     private Integer[] array;
@@ -41,6 +41,33 @@ public class SortBenchmarkTest {
     public void bubbleSort(Blackhole blackhole) {
 
         BubbleSort.sort(array);
+        blackhole.consume(array);
+    }
+
+    @Benchmark
+    @Warmup(iterations = 0)
+    @Fork(1)
+    public void insertionSort(Blackhole blackhole) {
+
+        InsertionSort.sort(array);
+        blackhole.consume(array);
+    }
+
+    @Benchmark
+    @Warmup(iterations = 0)
+    @Fork(1)
+    public void shellsort(Blackhole blackhole) {
+
+        ShellSort.sort(array);
+        blackhole.consume(array);
+    }
+
+    @Benchmark
+    @Warmup(iterations = 0)
+    @Fork(1)
+    public void measureMergesort(Blackhole blackhole) {
+
+        MergeSort.sort(array);
         blackhole.consume(array);
     }
 }
