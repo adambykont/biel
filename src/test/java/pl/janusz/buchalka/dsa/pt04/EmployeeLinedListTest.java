@@ -72,10 +72,4 @@ public class EmployeeLinedListTest {
         assertThat(employees.getSize(), is(0));
         assertThat(employees.isEmpty(), is(true));
     }
-
-    @Test
-    public void print() {
-
-        employees.printList();
-    }
 }
