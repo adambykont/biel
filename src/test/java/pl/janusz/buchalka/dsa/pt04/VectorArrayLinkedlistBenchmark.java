@@ -13,7 +13,7 @@ import java.util.Vector;
 @State(Scope.Benchmark)
 public class VectorArrayLinkedlistBenchmark {
 
-    @Param({"1000", "10000", "100000", "1000000"})
+    @Param({"1000", "10000"})
     private int size;
 
     private ArrayList<Integer> arrayList;
