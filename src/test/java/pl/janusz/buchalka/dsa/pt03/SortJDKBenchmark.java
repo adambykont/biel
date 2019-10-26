@@ -35,6 +35,8 @@ public class SortJDKBenchmark {
     }
 
     @Benchmark
+    @Warmup(iterations = 0)
+    @Fork(1)
     public void parallel(Blackhole blackhole) {
 
         JDKParallelSort.sort(array);
