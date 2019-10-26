@@ -58,18 +58,19 @@ public class EmployeeLinedListTest {
     @Test
     public void shouldRemoveAllOneByOne() {
 
-        assertThat(employees.isEmpty(),is(false));
+        assertThat(employees.isEmpty(), is(false));
         assertThat(employees.getSize(), is(4));
-        assertThat(employees.removeFromFront(),hasProperty("employee",is(felix)));
+        assertThat(employees.removeFromFront(), hasProperty("employee", is(felix)));
         assertThat(employees.getSize(), is(3));
-        assertThat(employees.removeFromFront(),hasProperty("employee",is(dixie)));
+        assertThat(employees.removeFromFront(), hasProperty("employee", is(dixie)));
         assertThat(employees.getSize(), is(2));
-        assertThat(employees.removeFromFront(),hasProperty("employee",is(pixie)));
+        assertThat(employees.removeFromFront(), hasProperty("employee", is(pixie)));
         assertThat(employees.getSize(), is(1));
-        assertThat(employees.removeFromFront(),hasProperty("employee",is(jinks)));
+        assertThat(employees.removeFromFront(), hasProperty("employee", is(jinks)));
         assertThat(employees.getSize(), is(0));
-        assertThat(employees.isEmpty(),is(true));
-
+        assertThat(employees.isEmpty(), is(true));
+        assertThat(employees.getSize(), is(0));
+        assertThat(employees.isEmpty(), is(true));
     }
 
     @Test

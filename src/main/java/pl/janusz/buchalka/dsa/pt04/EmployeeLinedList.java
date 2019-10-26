@@ -40,7 +40,8 @@ public class EmployeeLinedList {
         final EmployeeNode node = head;
         head = node.getNext();
         size--;
-
+        node.setNext(null);
+        
         return node;
     }
 }
