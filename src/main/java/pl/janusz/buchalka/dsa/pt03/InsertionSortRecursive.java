@@ -7,10 +7,18 @@ public class InsertionSortRecursive {
 
     public static void sort(Integer[] array) {
 
-        for (int i = 1; i < array.length; i++) {
+        recursiveSort(array, array.length - 1);
+    }
 
-            putElementToaAlreadySorted(array, i);
+    private static void recursiveSort(Integer[] array, int idx) {
+
+        if (idx == 0) {
+            return;
         }
+
+        recursiveSort(array, idx - 1);
+
+        putElementToaAlreadySorted(array, idx);
     }
 
     private static void putElementToaAlreadySorted(Integer[] array, int idx) {

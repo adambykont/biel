@@ -3,7 +3,9 @@ package pl.janusz.buchalka.dsa.pt03;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.hamcrest.Matchers.arrayContaining;
 import static org.hamcrest.Matchers.is;
@@ -14,6 +16,7 @@ import static org.junit.Assert.assertThat;
  */
 public class InsertionSortRecursiveTest {
 
+    private static final int BIG_SIZE = 1_000;
     private Integer[] unsortedNumbers;
     private Integer[] sortedNumbers;
 
@@ -27,6 +30,22 @@ public class InsertionSortRecursiveTest {
         InsertionSortRecursive.sort(unsortedOne);
 
         assertThat(unsortedOne, is(arrayContaining(sortedOne)));
+    }
+
+    @Test
+    public void sortMilllionElements() {
+
+        Integer[] unsorted = new Integer[BIG_SIZE];
+        for (int i = 0; i < unsorted.length; i++) {
+            unsorted[i] = ThreadLocalRandom.current().nextInt();
+        }
+
+        Integer[] sorted = unsorted.clone();
+        Arrays.parallelSort(sorted);
+
+        InsertionSortRecursive.sort(unsorted);
+
+        assertThat(unsorted, is(arrayContaining(sorted)));
     }
 
     @Test
