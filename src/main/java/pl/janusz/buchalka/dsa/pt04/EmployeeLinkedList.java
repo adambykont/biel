@@ -3,7 +3,7 @@ package pl.janusz.buchalka.dsa.pt04;
 /**
  * Created by Janusz Kacki on 26/10/2019. Project; bielmarcus
  */
-public class EmployeeLinedList {
+public class EmployeeLinkedList {
 
     private EmployeeNode head;
     private int size;

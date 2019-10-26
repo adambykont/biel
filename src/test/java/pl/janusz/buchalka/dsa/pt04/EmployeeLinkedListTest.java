@@ -2,10 +2,6 @@ package pl.janusz.buchalka.dsa.pt04;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
-
-import java.util.LinkedList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
@@ -13,9 +9,9 @@ import static org.hamcrest.Matchers.*;
 /**
  * Created by Janusz Kacki on 26/10/2019. Project; bielmarcus
  */
-public class EmployeeLinedListTest {
+public class EmployeeLinkedListTest {
 
-    private EmployeeLinedList employees;
+    private EmployeeLinkedList employees;
     private Employee jinks;
     private Employee pixie;
     private Employee dixie;
@@ -24,7 +20,7 @@ public class EmployeeLinedListTest {
     @Before
     public void setUp() throws Exception {
 
-        employees = new EmployeeLinedList();
+        employees = new EmployeeLinkedList();
         jinks = new Employee("Jinks", "Tomcat", 1);
         pixie = new Employee("Pixie", "Mouse", 2);
         dixie = new Employee("Dixie", "Mouse", 3);
