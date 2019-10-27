@@ -15,33 +15,17 @@ public class EmployeeDoublyLinkedList {
 
     public void addToFront(Employee employee) {
 
-        final EmployeeNode node = new EmployeeNode(employee);
-        node.setNext(head);
-        head = node;
-        size++;
     }
 
     public void printList() {
 
-        EmployeeNode slider = head;
-        while (slider != null) {
-            System.out.println(slider);
-            slider = slider.getNext();
-        }
     }
 
     public boolean isEmpty() {
 
-        return head == null;
     }
 
     public EmployeeNode removeFromFront() {
 
-        final EmployeeNode node = head;
-        head = node.getNext();
-        size--;
-        node.setNext(null);
-
-        return node;
     }
 }
