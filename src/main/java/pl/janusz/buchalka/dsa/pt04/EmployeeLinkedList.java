@@ -41,7 +41,7 @@ public class EmployeeLinkedList {
         head = node.getNext();
         size--;
         node.setNext(null);
-        
+
         return node;
     }
 }
