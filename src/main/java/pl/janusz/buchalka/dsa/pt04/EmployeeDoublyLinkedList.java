@@ -23,9 +23,11 @@ public class EmployeeDoublyLinkedList {
 
     public boolean isEmpty() {
 
+        return size == 0;
     }
 
     public EmployeeNode removeFromFront() {
 
+        return null;
     }
 }
