@@ -11,4 +11,9 @@ import static org.hamcrest.Matchers.*;
  */
 public class EmployeeDoublyLinkedListTest extends EmployeeLinkedBasicTest {
 
+    @Override
+    protected List getImplementation() {
+
+        return new EmployeeDoublyLinkedList();
+    }
 }
