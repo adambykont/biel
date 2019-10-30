@@ -3,7 +3,7 @@ package pl.janusz.buchalka.dsa.pt04;
 /**
  * Created by Janusz Kacki on 26/10/2019. Project; bielmarcus
  */
-public class Employee {
+public class Employee implements Comparable<Employee> {
 
     private String firstName;
     private String lastName;
@@ -82,5 +82,11 @@ public class Employee {
     public void setId(int id) {
 
         this.id = id;
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+
+        return Integer.compare(id, o.id);
     }
 }

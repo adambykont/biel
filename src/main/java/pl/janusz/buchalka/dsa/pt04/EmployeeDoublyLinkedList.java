@@ -18,11 +18,20 @@ public class EmployeeDoublyLinkedList implements List {
     @Override
     public void addToFront(Employee employee) {
 
+        final EmployeeNode node = new EmployeeNode(employee);
+        node.setPrev(null);
+        node.setNext(head);
+        head = node;
+        size++;
     }
 
     @Override
     public void printList() {
 
+        EmployeeNode slider = head;
+        while (slider != null) {
+            System.out.println(slider);
+        }
     }
 
     @Override
@@ -34,6 +43,11 @@ public class EmployeeDoublyLinkedList implements List {
     @Override
     public EmployeeNode removeFromFront() {
 
-        return null;
+        EmployeeNode node = head;
+        head = node.getNext();
+        node.setNext(null);
+        size--;
+
+        return node;
     }
 }
