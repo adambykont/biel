@@ -9,6 +9,6 @@ import static org.hamcrest.Matchers.*;
 /**
  * Created by Janusz Kacki on 27/10/2019. Project; bielmarcus
  */
-public class EmployeeDoublyLinkedListTest {
+public class EmployeeDoublyLinkedListTest extends EmployeeLinkedBasicTest {
 
 }

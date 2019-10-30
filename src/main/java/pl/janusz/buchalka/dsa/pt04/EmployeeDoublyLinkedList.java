@@ -6,6 +6,7 @@ package pl.janusz.buchalka.dsa.pt04;
 public class EmployeeDoublyLinkedList {
 
     private EmployeeNode head;
+    private EmployeeNode tail;
     private int size;
 
     public int getSize() {

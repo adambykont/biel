@@ -9,37 +9,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * Created by Janusz Kacki on 26/10/2019. Project; bielmarcus
  */
-public class EmployeeLinkedListTest {
-
-    private EmployeeLinkedList employees;
-    private Employee jinks;
-    private Employee pixie;
-    private Employee dixie;
-    private Employee felix;
-
-    @Before
-    public void setUp() throws Exception {
-
-        employees = new EmployeeLinkedList();
-        jinks = new Employee("Jinks", "Tomcat", 1);
-        pixie = new Employee("Pixie", "Mouse", 2);
-        dixie = new Employee("Dixie", "Mouse", 3);
-        felix = new Employee("Felix", "Cat", 4);
-
-        employees.addToFront(jinks);
-        employees.addToFront(pixie);
-        employees.addToFront(dixie);
-        employees.addToFront(felix);
-    }
-
-    @Test
-    public void sizeShouldBeFour() {
-
-        final int size = employees.getSize();
-        assertThat(size, is(4));
-
-        assertThat(employees.isEmpty(), is(false));
-    }
+public class EmployeeLinkedListTest extends EmployeeLinkedBasicTest {
 
     @Test
     public void shouldRemoveFirst() {
