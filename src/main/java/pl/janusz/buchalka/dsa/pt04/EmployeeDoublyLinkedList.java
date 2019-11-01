@@ -93,4 +93,34 @@ public class EmployeeDoublyLinkedList implements List {
 
         return node;
     }
+
+    public void addBefore(Employee employee, Employee before) {
+
+        EmployeeNode position = findNode(before);
+        if (position == null) {
+            return;
+        }
+
+        if (position.getPrev() == null) {
+            addToFront(employee);
+        } else {
+            final EmployeeNode node = new EmployeeNode(employee);
+            position.getPrev().setNext(node);
+            node.setPrev(position.getPrev());
+            node.setNext(position);
+            position.setPrev(node);
+            size++;
+        }
+    }
+
+    private EmployeeNode findNode(Employee lookup) {
+
+        EmployeeNode slider = head;
+
+        while (slider != null && !lookup.equals(slider.getEmployee())) {
+            slider = slider.getNext();
+        }
+
+        return slider;
+    }
 }

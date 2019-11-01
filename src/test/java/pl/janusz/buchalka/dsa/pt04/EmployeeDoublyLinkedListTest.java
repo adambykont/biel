@@ -67,4 +67,95 @@ public class EmployeeDoublyLinkedListTest extends EmployeeLinkedBasicTest {
         assertThat(employees.isEmpty(), is(true));
         assertThat(employees.getSize(), is(0));
     }
-}
+
+    @Test
+    public void addBeforeNonExistingEmployeeDoesNothing() {
+
+        final EmployeeDoublyLinkedList employees = new EmployeeDoublyLinkedList();
+        employees.addToFront(jinks);
+        employees.addToFront(dixie);
+        assertThat(employees.getSize(), is(2));
+
+        employees.addBefore(felix, pixie);
+        assertThat(employees.getSize(), is(2));
+    }
+
+    @Test
+    public void addBeforenonExistingFirstElementg() {
+
+        final EmployeeDoublyLinkedList employees = new EmployeeDoublyLinkedList();
+        employees.addToFront(dixie);
+        employees.addToFront(pixie);
+        employees.addToFront(jinks);
+        assertThat(employees.getSize(), is(3));
+
+        employees.addBefore(felix, jinks);
+        assertThat(employees.getSize(), is(4));
+
+        EmployeeNode node;
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(felix)));
+        assertThat(employees.getSize(), is(3));
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(jinks)));
+        assertThat(employees.getSize(), is(2));
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(pixie)));
+        assertThat(employees.getSize(), is(1));
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(dixie)));
+        assertThat(employees.getSize(), is(0));
+    }
+
+    @Test
+    public void addBeforeSecondExisyingElement() {
+
+        final EmployeeDoublyLinkedList employees = new EmployeeDoublyLinkedList();
+        employees.addToFront(dixie);
+        employees.addToFront(pixie);
+        employees.addToFront(jinks);
+        assertThat(employees.getSize(), is(3));
+
+        employees.addBefore(felix, pixie);
+        assertThat(employees.getSize(), is(4));
+        EmployeeNode node;
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(jinks)));
+        assertThat(employees.getSize(), is(3));
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(felix)));
+        assertThat(employees.getSize(), is(2));
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(pixie)));
+        assertThat(employees.getSize(), is(1));
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(dixie)));
+        assertThat(employees.getSize(), is(0));
+    }
+
+    @Test
+    public void addBeforeThirdExisyingElement() {
+
+        final EmployeeDoublyLinkedList employees = new EmployeeDoublyLinkedList();
+        employees.addToFront(dixie);
+        employees.addToFront(pixie);
+        employees.addToFront(jinks);
+        assertThat(employees.getSize(), is(3));
+
+        employees.addBefore(felix, dixie);
+        assertThat(employees.getSize(), is(4));
+        EmployeeNode node;
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(jinks)));
+        assertThat(employees.getSize(), is(3));
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(pixie)));
+        assertThat(employees.getSize(), is(2));
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(felix)));
+        assertThat(employees.getSize(), is(1));
+        node = employees.removeFromFront();
+        assertThat(node, hasProperty("employee", is(dixie)));
+        assertThat(employees.getSize(), is(0));
+    }
+}             
