@@ -11,9 +11,9 @@ public interface List<E> extends Iterable<E> {
 
     E remove(int index) throws IndexOutOfBoundsException;
 
-    boolean remove(Object o);
+    boolean remove(E e);
 
-    Object get(int index, E value) throws IndexOutOfBoundsException;
+    Object get(int index) throws IndexOutOfBoundsException;
 
     Object set(int index, E value) throws IndexOutOfBoundsException;
 
