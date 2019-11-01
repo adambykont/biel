@@ -1,6 +1,7 @@
 package pl.janusz.ut28minutes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -10,22 +11,16 @@ public class Zero {
 
     public static void main(String[] args) {
 
-        final ArrayList<Integer> arrayList = new ArrayList<>();
-        final LinkedList<Integer> linkedList = new LinkedList<>();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        LinkedList<Integer> linkedList = new LinkedList<>();
 
-        arrayList.add(0,0);
-        linkedList.add(0,0);
-        System.out.println(arrayList.get(0));
-        System.out.println(linkedList.get(0));
-
-        arrayList.clear();
-        linkedList.clear();
-
-        arrayList.set(0, 0);
-        linkedList.set(0, 0);
-
-        System.out.println(arrayList.get(0));
-        System.out.println(linkedList.get(0));
-
+        linkedList.add(1);
+        linkedList.add(2);
+        linkedList.add(3);
+        Iterator<Integer> iterator = linkedList.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+            iterator.remove();
+        }
     }
 }

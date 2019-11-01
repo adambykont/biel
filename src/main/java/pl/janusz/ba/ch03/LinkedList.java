@@ -165,4 +165,28 @@ public class LinkedList<E> implements List<E> {
             this.element = element;
         }
     }
+
+    private class LinkedListIterator<E> implements Iterator<E> {
+
+        private int idx = 0;
+
+        @Override
+        public boolean hasNext() {
+
+            return idx < size();
+        }
+
+        @Override
+        public E next() {
+
+            return (E) get(idx++);
+        }
+
+        @Override
+        public void remove() {
+
+            LinkedList.this.remove(idx - 1);
+            idx--;
+        }
+    }
 }

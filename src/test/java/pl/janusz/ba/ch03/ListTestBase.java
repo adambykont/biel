@@ -1,6 +1,7 @@
 package pl.janusz.ba.ch03;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -16,6 +17,7 @@ public abstract class ListTestBase {
     protected String b;
     protected String c;
     protected List<String> list = createList();
+    private Iterator<String> iterator;
 
     @Test
     public void emptyListAtTheBeginning() {
@@ -478,7 +480,139 @@ public abstract class ListTestBase {
         c = new String("C");
 
         List<String> list = createList();
+        iterator = this.list.iterator();
     }
 
     protected abstract List<String> createList();
+
+    @Test
+    public void iteratorHasNonextOnEmptyList() {
+
+        assertThat(iterator.hasNext(), is(false));
+    }
+
+    @Test
+    public void iteratorOnOneElementHasOneNext() {
+
+        list.add(a);
+        assertThat(iterator.hasNext(), is(true));
+        iterator.next();
+        assertThat(iterator.hasNext(), is(false));
+    }
+
+    @Test
+    public void iteratorOnThreeElementHasOneNext() {
+
+        list.add(a);
+        list.add(b);
+        list.add(c);
+        assertThat(iterator.hasNext(), is(true));
+        iterator.next();
+        assertThat(iterator.hasNext(), is(true));
+        iterator.next();
+        assertThat(iterator.hasNext(), is(true));
+        iterator.next();
+        assertThat(iterator.hasNext(), is(false));
+    }
+
+    @Test
+    public void getByIteratorInOneElementList() {
+
+        list.add(a);
+        final String next = iterator.next();
+        assertThat(next, is(a));
+        assertThat(iterator.hasNext(), is(false));
+    }
+
+    @Test
+    public void getByIteratorInThreeElementList() {
+
+        list.add(a);
+        list.add(b);
+        list.add(c);
+        String next;
+        next = iterator.next();
+        assertThat(next, is(a));
+        assertThat(iterator.hasNext(), is(true));
+        next = iterator.next();
+        assertThat(next, is(b));
+        assertThat(iterator.hasNext(), is(true));
+        next = iterator.next();
+        assertThat(next, is(c));
+        assertThat(iterator.hasNext(), is(false));
+
+        assertThat(list.get(0), is(a));
+        assertThat(list.get(1), is(b));
+        assertThat(list.get(2), is(c));
+    }
+
+    @Test
+    public void iteratorRemoveFromOneElementList() {
+
+        list.add(a);
+        final String next = iterator.next();
+        assertThat(next, is(a));
+        assertThat(list.get(0), is(a));
+        iterator.remove();
+        assertThat(list.size(), is(0));
+    }
+
+    @Test
+    public void removeFromTwoElementList() {
+
+        list.add(a);
+        list.add(b);
+        String next;
+        assertThat(list.size(), is(2));
+        assertThat(iterator.hasNext(), is(true));
+        next = iterator.next();
+        assertThat(next, is(a));
+        iterator.remove();
+        assertThat(list.size(), is(1));
+        assertThat(iterator.hasNext(), is(true));
+        next = iterator.next();
+        assertThat(next, is(b));
+        assertThat(iterator.hasNext(), is(false));
+        assertThat(list.size(), is(1));
+    }
+
+    @Test
+    public void removeByIteratorInThreeElementList() {
+
+        list.add(a);
+        list.add(b);
+        list.add(c);
+        String next;
+        next = iterator.next();
+        assertThat(next, is(a));
+        assertThat(iterator.hasNext(), is(true));
+        iterator.remove();
+        assertThat(list.size(), is(2));
+        assertThat(list.get(0), is(b));
+        assertThat(list.get(1), is(c));
+
+        next = iterator.next();
+        assertThat(next, is(b));
+        assertThat(iterator.hasNext(), is(true));
+        iterator.remove();
+        assertThat(list.size(), is(1));
+        assertThat(list.get(0), is(c));
+
+        next = iterator.next();
+        assertThat(next, is(c));
+        assertThat(iterator.hasNext(), is(false));
+        iterator.remove();
+        assertThat(list.size(), is(0));
+    }
+
+    @Test
+    public void clearShouldCleanList() {
+
+        list.add(a);
+        list.add(b);
+        list.add(c);
+
+        list.clear();
+        assertThat(list.isEmpty(), is(true));
+    }
 }

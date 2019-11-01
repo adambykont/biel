@@ -150,4 +150,28 @@ public class ArrayList<E> implements List<E> {
 
         return new ArrayListIterator<>();
     }
+
+    private class ArrayListIterator<E> implements Iterator<E> {
+
+        private int idx = 0;
+
+        @Override
+        public boolean hasNext() {
+
+            return idx < size();
+        }
+
+        @Override
+        public E next() {
+
+            return (E) get(idx++);
+        }
+
+        @Override
+        public void remove() {
+
+            ArrayList.this.remove(idx - 1);
+            idx--;
+        }
+    }
 }
