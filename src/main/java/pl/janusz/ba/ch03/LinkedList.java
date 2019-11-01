@@ -151,7 +151,7 @@ public class LinkedList<E> implements List<E> {
     @Override
     public Iterator<E> iterator() {
 
-        return null;
+        return new LinkedListIterator<>();
     }
 
     private class Node<E> {

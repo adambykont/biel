@@ -148,6 +148,6 @@ public class ArrayList<E> implements List<E> {
     @Override
     public Iterator<E> iterator() {
 
-        return null;
+        return new ArrayListIterator<>();
     }
 }
