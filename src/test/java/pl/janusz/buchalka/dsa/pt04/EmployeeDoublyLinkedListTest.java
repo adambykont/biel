@@ -21,4 +21,50 @@ public class EmployeeDoublyLinkedListTest extends EmployeeLinkedBasicTest {
 
         return new EmployeeDoublyLinkedList();
     }
+
+    @Test
+    public void shouldAddFourEmployeesToEnd() {
+
+        EmployeeDoublyLinkedList employees = new EmployeeDoublyLinkedList();
+        assertThat(employees.isEmpty(), is(true));
+        assertThat(employees.getSize(), is(0));
+        employees.addToEnd(jinks);
+        assertThat(employees.isEmpty(), is(false));
+        assertThat(employees.getSize(), is(1));
+        employees.addToEnd(pixie);
+        assertThat(employees.isEmpty(), is(false));
+        assertThat(employees.getSize(), is(2));
+        employees.addToEnd(dixie);
+        assertThat(employees.isEmpty(), is(false));
+        assertThat(employees.getSize(), is(3));
+        employees.addToEnd(felix);
+        assertThat(employees.isEmpty(), is(false));
+        assertThat(employees.getSize(), is(4));
+
+        EmployeeNode node;
+        node = employees.removeFromEnd();
+        assertThat(node, hasProperty("employee", is(felix)));
+        assertThat(employees.isEmpty(), is(false));
+        assertThat(employees.getSize(), is(3));
+        node = employees.removeFromEnd();
+        assertThat(node, hasProperty("employee", is(dixie)));
+        assertThat(employees.isEmpty(), is(false));
+        assertThat(employees.getSize(), is(2));
+        node = employees.removeFromEnd();
+        assertThat(node, hasProperty("employee", is(pixie)));
+        assertThat(employees.isEmpty(), is(false));
+        assertThat(employees.getSize(), is(1));
+        node = employees.removeFromEnd();
+        assertThat(node, hasProperty("employee", is(jinks)));
+        assertThat(employees.isEmpty(), is(true));
+        assertThat(employees.getSize(), is(0));
+        node = employees.removeFromEnd();
+        assertThat(node, is(nullValue()));
+        assertThat(employees.isEmpty(), is(true));
+        assertThat(employees.getSize(), is(0));
+        node = employees.removeFromEnd();
+        assertThat(node, is(nullValue()));
+        assertThat(employees.isEmpty(), is(true));
+        assertThat(employees.getSize(), is(0));
+    }
 }

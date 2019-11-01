@@ -3,7 +3,7 @@ package pl.janusz.buchalka.dsa.pt04;
 /**
  * Created by Janusz Kacki on 26/10/2019. Project; bielmarcus
  */
-public class EmployeeLinkedList implements List{
+public class EmployeeLinkedList implements List {
 
     private EmployeeNode head;
     private int size;
@@ -38,9 +38,11 @@ public class EmployeeLinkedList implements List{
     public EmployeeNode removeFromFront() {
 
         final EmployeeNode node = head;
-        head = node.getNext();
-        size--;
-        node.setNext(null);
+        if (head != null) {
+            head = node.getNext();
+            size--;
+            node.setNext(null);
+        }
 
         return node;
     }

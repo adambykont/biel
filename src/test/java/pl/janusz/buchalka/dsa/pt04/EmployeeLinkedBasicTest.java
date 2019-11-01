@@ -65,6 +65,10 @@ public abstract class EmployeeLinkedBasicTest {
         assertThat(employees.removeFromFront(), hasProperty("employee", is(jinks)));
         assertThat(employees.getSize(), is(0));
         assertThat(employees.isEmpty(), is(true));
+        assertThat(employees.removeFromFront(), is(nullValue()));
+        assertThat(employees.getSize(), is(0));
+        assertThat(employees.isEmpty(), is(true));
+        assertThat(employees.removeFromFront(), is(nullValue()));
         assertThat(employees.getSize(), is(0));
         assertThat(employees.isEmpty(), is(true));
     }

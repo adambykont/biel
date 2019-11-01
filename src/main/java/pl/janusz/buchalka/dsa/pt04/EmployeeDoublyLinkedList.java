@@ -19,9 +19,27 @@ public class EmployeeDoublyLinkedList implements List {
     public void addToFront(Employee employee) {
 
         final EmployeeNode node = new EmployeeNode(employee);
-        node.setPrev(null);
-        node.setNext(head);
+        if (head == null) {
+            tail = node;
+        } else {
+            head.setPrev(node);
+            node.setNext(head);
+        }
         head = node;
+        size++;
+    }
+
+    public void addToEnd(Employee employee) {
+
+        final EmployeeNode node = new EmployeeNode(employee);
+        if (tail == null) {
+            head = tail = node;
+        } else {
+            node.setPrev(tail);
+            tail.setNext(node);
+            tail = node;
+        }
+
         size++;
     }
 
@@ -44,9 +62,34 @@ public class EmployeeDoublyLinkedList implements List {
     public EmployeeNode removeFromFront() {
 
         EmployeeNode node = head;
-        head = node.getNext();
-        node.setNext(null);
-        size--;
+        if (head != null) {
+            head = node.getNext();
+            if (size == 1) {
+                tail = null;
+            } else {
+                node.getNext().setPrev(null);
+            }
+            node.setNext(null);
+            size--;
+        }
+
+        return node;
+    }
+
+    public EmployeeNode removeFromEnd() {
+
+        EmployeeNode node = tail;
+
+        if (tail != null) {
+            if (size == 1) {
+                head = tail = null;
+            } else {
+                tail.getPrev().setNext(null);
+                tail = tail.getPrev();
+            }
+            node.setPrev(null);
+            size--;
+        }
 
         return node;
     }
