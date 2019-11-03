@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.*;
 @State(Scope.Thread)
 public abstract class DequeBenchmarks {
 
-    @Param({"1000", "10000"})
+    @Param({"100", "1000"})
     private int elements;
 
     private Deque<Integer> deque;
@@ -26,9 +26,9 @@ public abstract class DequeBenchmarks {
 
     protected abstract Deque getDeque();
 
+    @Benchmark
     @Warmup(iterations = 0)
     @Fork(1)
-    @Benchmark
     public void measureDeque(Blackhole blackhole) {
 
         for (int i = 0; i < elements; i++) {
