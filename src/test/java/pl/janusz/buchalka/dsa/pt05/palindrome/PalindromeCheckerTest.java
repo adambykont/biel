@@ -45,9 +45,14 @@ public class PalindromeCheckerTest {
      @Test
     public void shouldBePalindrome12_21() {
 
-         final boolean palindrome = PalindromeChecker.isPalindrome("1 1 2 21 1");
+         final boolean palindrome = PalindromeChecker.isPalindrome("1 1     2  21 1");
          assertThat(palindrome, is(true));
     }
 
+    @Test
+    public void shouldBeDontnod() {
 
+        final boolean palindrome = PalindromeChecker.isPalindrome("Don't nod");
+        assertThat(palindrome, is(true));
+    }
 }

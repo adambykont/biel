@@ -18,7 +18,9 @@ public class PalindromeChecker {
 
         word = word.trim();
         word = word.toLowerCase();
-        word = word.replace(" ", "");
+        String regexp = "\\s+";
+        word = word.replaceAll(regexp, "");
+        word = word.replaceAll("\'", "");
 
         if (word.length() == 0) {
             return true;
