@@ -44,6 +44,7 @@ public class ArrayStack<E> implements Stack<E> {
 
         final E e = (E) array[--cursor];
         size--;
+        array[cursor] = null;
 
         return e;
     }
