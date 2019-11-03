@@ -3,36 +3,37 @@ package pl.janusz.buchalka.dsa.pt06;
 /**
  * Created by Janusz Kacki on 03/11/2019. Project; bielmarcus
  */
-public class ArrayQueue<E> implements Queue<E> {
+public class CircularQueue<E> implements Queue<E> {
 
-    private static final int INITIAL_CAPACITY = 2;
+    private static final int DEFAULT_CAPACITY = 32;
+
+    private int capacity;
     private Object[] array;
     private int head;
     private int tail;
     private int size;
 
-    public ArrayQueue() {
+    public CircularQueue() {
 
+        this(DEFAULT_CAPACITY);
+    }
+
+    public CircularQueue(int size) {
+
+        this.capacity = size;
         clear();
     }
 
     @Override
     public void add(E element) {
 
-        assureCapacity();
-        array[tail++] = element;
-        size++;
-    }
-
-    private void assureCapacity() {
-
-        if (array.length == size() || array.length == tail) {
-            final Object[] temp = new Object[array.length * 2];
-            System.arraycopy(array, head, temp, 0, tail - head);
-            tail = tail - head;
-            head = 0;
-            array = temp;
+        if (size == capacity) {
+            throw new IndexOutOfBoundsException();
         }
+
+        array[tail] = element;
+        size++;
+        tail = (tail + 1) % capacity;
     }
 
     @Override
@@ -42,9 +43,10 @@ public class ArrayQueue<E> implements Queue<E> {
             throw new IndexOutOfBoundsException();
         }
 
+        final E e = (E) array[head];
+        array[head] = null;
+        head = (head + 1) % capacity;
         size--;
-        final E e = (E) array[head++];
-        array[head - 1] = null;
 
         return e;
     }
@@ -60,21 +62,21 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     @Override
-    public boolean isEmpty() {
-
-        return size() == 0;
-    }
-
-    @Override
     public int size() {
 
         return size;
     }
 
     @Override
+    public boolean isEmpty() {
+
+        return size() == 0;
+    }
+
+    @Override
     public void clear() {
 
-        array = new Object[INITIAL_CAPACITY];
+        array = new Object[capacity];
         head = 0;
         tail = 0;
         size = 0;
