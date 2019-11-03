@@ -5,7 +5,7 @@ package pl.janusz.buchalka.dsa.pt06;
  */
 public class CircularQueue<E> implements Queue<E> {
 
-    private static final int DEFAULT_CAPACITY = 32;
+    private static final int DEFAULT_CAPACITY = 2;
 
     private int capacity;
     private Object[] array;
@@ -27,13 +27,29 @@ public class CircularQueue<E> implements Queue<E> {
     @Override
     public void add(E element) {
 
-        if (size == capacity) {
-            throw new IndexOutOfBoundsException();
-        }
+        assureCapacity();
 
         array[tail] = element;
         size++;
         tail = (tail + 1) % capacity;
+    }
+
+    private void assureCapacity() {
+
+        if (size() + 1 == array.length) {
+            Object[] temp = new Object[array.length * 2];
+
+            if (tail > head) {
+                System.arraycopy(array, head, temp, 0, size());
+            } else {
+                System.arraycopy(array, head, temp, 0, array.length - head);
+                System.arraycopy(array, 0, temp, array.length - head, tail);
+            }
+
+            head = 0;
+            tail = size();
+            array = temp;
+        }
     }
 
     @Override

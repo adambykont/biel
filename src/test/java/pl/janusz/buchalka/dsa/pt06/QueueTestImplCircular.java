@@ -41,20 +41,4 @@ public class QueueTestImplCircular extends QueueTest {
         assertThat(queue.remove(), is(d));
         assertThat(queue.size(), is(0));
     }
-
-    @Test
-    public void fullQueueThrowsExceptionWhenAdding() {
-
-        CircularQueue<String> queue = new CircularQueue<>(2);
-
-        queue.add(a);
-        queue.add(b);
-
-        try {
-            queue.add(c);
-            fail();
-        } catch (Exception e) {
-            assertThat(e, instanceOf(IndexOutOfBoundsException.class));
-        }
-    }
 }
