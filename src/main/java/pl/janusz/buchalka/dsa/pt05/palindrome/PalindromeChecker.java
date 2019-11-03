@@ -24,19 +24,30 @@ public class PalindromeChecker {
             return true;
         }
 
-        int left = 0;
-        int right = word.length() - 1;
-
-        while (left <= right) {
-            stack.push(word.charAt(left) + "");
-            left++;
-            String corresponding = word.charAt(right) + "";
-            right--;
-            if (!stack.pop().equals(corresponding)) {
-                return false;
-            }
+        for (int i = 0; i < word.length(); i++) {
+            stack.push(""+word.charAt(i));
         }
 
-        return true;
+        StringBuilder stringBuilder = new StringBuilder();
+        while (!stack.isEmpty()) {
+            stringBuilder.append(stack.pop());
+        }
+
+        return stringBuilder.toString().equals(word);
+
+//        int left = 0;
+//        int right = word.length() - 1;
+//
+//        while (left <= right) {
+//            stack.push(word.charAt(left) + "");
+//            left++;
+//            String corresponding = word.charAt(right) + "";
+//            right--;
+//            if (!stack.pop().equals(corresponding)) {
+//                return false;
+//            }
+//        }
+//
+//        return true;
     }
 }
