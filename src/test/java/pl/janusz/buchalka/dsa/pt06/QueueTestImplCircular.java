@@ -18,6 +18,25 @@ public class QueueTestImplCircular extends QueueTest {
     }
 
     @Test
+    public void addFourElementsToSizeTwoQueue() {
+
+        CircularQueue<String> queue = new CircularQueue<>(2);
+        queue.add(a);
+        queue.add(b);
+        queue.add(c);
+        queue.add(d);
+        assertThat(queue.size(), is(4));
+        assertThat(queue.remove(), is(a));
+        assertThat(queue.size(), is(3));
+        assertThat(queue.remove(), is(b));
+        assertThat(queue.size(), is(2));
+        assertThat(queue.remove(), is(c));
+        assertThat(queue.size(), is(1));
+        assertThat(queue.remove(), is(d));
+        assertThat(queue.size(), is(0));
+    }
+
+    @Test
     public void circleThrouhTwoElementsQueue() {
 
         CircularQueue<String> queue = new CircularQueue<>(2);

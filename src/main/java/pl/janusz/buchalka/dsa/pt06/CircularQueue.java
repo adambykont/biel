@@ -36,7 +36,7 @@ public class CircularQueue<E> implements Queue<E> {
 
     private void assureCapacity() {
 
-        if (size() + 1 == array.length) {
+        if (size() == array.length) {
             Object[] temp = new Object[array.length * 2];
 
             if (tail > head) {
@@ -49,6 +49,7 @@ public class CircularQueue<E> implements Queue<E> {
             head = 0;
             tail = size();
             array = temp;
+            capacity *= 2;
         }
     }
 
