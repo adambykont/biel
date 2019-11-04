@@ -42,11 +42,12 @@ public class PalindromeCheckerTest {
 
         assertThat(PalindromeChecker.isPalindrome("1221"), is(true));
     }
-     @Test
+
+    @Test
     public void shouldBePalindrome12_21() {
 
-         final boolean palindrome = PalindromeChecker.isPalindrome("1 1     2  21 1");
-         assertThat(palindrome, is(true));
+        final boolean palindrome = PalindromeChecker.isPalindrome("1 1     2  21 1");
+        assertThat(palindrome, is(true));
     }
 
     @Test
@@ -54,5 +55,25 @@ public class PalindromeCheckerTest {
 
         final boolean palindrome = PalindromeChecker.isPalindrome("Don't nod");
         assertThat(palindrome, is(true));
+    }
+
+    @Test
+    public void kayakIsPalindrome() {
+
+        final boolean kayak = PalindromeChecker.isPalindrome("kayak");
+        assertThat(kayak, is(true));
+    }
+
+    @Test
+    public void akkaIsPalindrome() {
+
+        final boolean akka = PalindromeChecker.isPalindrome("Akka");
+        assertThat(akka, is(true));
+    }
+    @Test
+    public void String1221IsPalindrome() {
+
+        final boolean result = PalindromeChecker.isPalindrome("1221");
+        assertThat(result, is(true));
     }
 }

@@ -9,8 +9,12 @@ import java.util.LinkedList;
 public class PalindromeChecker {
 
     private static Deque<String> stack = new LinkedList<>();
+    private static Deque<String> queue = new LinkedList<>();
 
     public static boolean isPalindrome(String word) {
+
+        stack.clear();
+        queue.clear();
 
         if (word == null) {
             return true;
@@ -22,11 +26,26 @@ public class PalindromeChecker {
         word = word.replaceAll(regexp, "");
         word = word.replaceAll("\'", "");
 
-        if (word.length() == 0) {
-            return true;
+        for (int i = 0; i < word.length(); i++) {
+            final String s = word.charAt(i) + "";
+            stack.push(s);
+            queue.add(s);
         }
 
-        return check(word, 0, word.length() - 1);
+        while (!stack.isEmpty()) {
+            if (!stack.pop().equals(queue.remove())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+//        if (word.length() == 0) {
+//            return true;
+//        }
+//
+//        return check(word, 0, word.length() - 1);
 
 //        for (int i = 0; i < word.length(); i++) {
 //            stack.push(""+word.charAt(i));
@@ -53,18 +72,18 @@ public class PalindromeChecker {
 //        }
 //
 //        return true;
-    }
+//    }
 
-    private static boolean check(String word, int left, int right) {
-
-        if (left > right) {
-            return true;
-        }
-
-        if (word.charAt(left) != word.charAt(right)) {
-            return false;
-        }
-
-        return check(word, ++left, --right);
-    }
+//    private static boolean check(String word, int left, int right) {
+//
+//        if (left > right) {
+//            return true;
+//        }
+//
+//        if (word.charAt(left) != word.charAt(right)) {
+//            return false;
+//        }
+//
+//        return check(word, ++left, --right);
+//    }
 }
