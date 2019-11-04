@@ -5,7 +5,7 @@ package pl.janusz.buchalka.dsa.pt07;
  */
 public class SimpleHashTable<K, V> implements HashTable<K, V> {
 
-    private static final int INITIAL_CAPACITY = 10;
+    private static final int INITIAL_CAPACITY = 4;
     private V[] hashtable;
 
     public SimpleHashTable() {
@@ -36,5 +36,14 @@ public class SimpleHashTable<K, V> implements HashTable<K, V> {
         int hashedKey = hashKey(key);
 
         return hashtable[hashedKey];
+    }
+
+    @Override
+    public V remove(K key) {
+
+        final V v = hashtable[hashKey(key)];
+        hashtable[hashKey(key)] = null;
+
+        return v;
     }
 }

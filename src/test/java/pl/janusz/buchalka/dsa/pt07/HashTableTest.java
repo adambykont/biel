@@ -1,6 +1,7 @@
 package pl.janusz.buchalka.dsa.pt07;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -20,6 +21,7 @@ public abstract class HashTableTest {
     protected Employee pluto;
     protected Employee tom;
     protected Employee jerry;
+    protected Employee dino;
 
     @Before
     public void setUp() throws Exception {
@@ -33,6 +35,7 @@ public abstract class HashTableTest {
         pluto = new Employee("Pluto", "Dog", 7);
         tom = new Employee("Tom", "Cat", 7);
         jerry = new Employee("Jerry", "Mouse", 7);
+        dino = new Employee("Dino", "Dinosaur", 3);
     }
 
     protected abstract HashTable<String, Employee> getHashTable();
@@ -55,5 +58,42 @@ public abstract class HashTableTest {
         assertThat(employee, is(jinks));
         employee = hashTable.get(tom.getFirstName());
         assertThat(employee, is(tom));
+    }
+
+    @Test
+    public void removeElementFromOneElementHashTable() {
+
+        hashTable.put(pixie.getFirstName(), pixie);
+        Employee remove = hashTable.remove(pixie.getFirstName());
+        assertThat(remove, is(pixie));
+    }
+
+    @Test
+    public void addOneRmoveOneAddAndremoveAgain() {
+
+        hashTable.put(pixie.getFirstName(), pixie);
+        assertThat(hashTable.remove(pixie.getFirstName()), is(pixie));
+        hashTable.put(dixie.getFirstName(), dixie);
+        assertThat(hashTable.remove(dixie.getFirstName()), is(dixie));
+    }
+
+    @Test
+    public void addOneRmoveOneAddAndremoveRepeatedTwoTimes() {
+
+        hashTable.put(pixie.getFirstName(), pixie);
+        hashTable.put(dino.getFirstName(), dino);
+        hashTable.put(tom.getFirstName(), tom);
+        assertThat(hashTable.remove(pixie.getFirstName()), is(pixie));
+        hashTable.put(dixie.getFirstName(), dixie);
+        assertThat(hashTable.remove(dixie.getFirstName()), is(dixie));
+        assertThat(hashTable.remove(dino.getFirstName()), is(dino));
+        assertThat(hashTable.remove(tom.getFirstName()), is(tom));
+    }
+
+    @Test
+    public void getnonExistingValueFromEmptyHashTableReturnsNull() {
+
+        assertThat(hashTable.get(pixie.getFirstName()), is(nullValue()));
+
     }
 }

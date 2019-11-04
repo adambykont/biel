@@ -5,7 +5,7 @@ package pl.janusz.buchalka.dsa.pt07;
  */
 public class LinearProbbingHashTable<K, V> implements HashTable<K, V> {
 
-    private static final int INITIAL_CAPACITY = 5;
+    private static final int INITIAL_CAPACITY = 4;
     private Entry<K, V>[] hashtable;
 
     public LinearProbbingHashTable() {
@@ -60,15 +60,35 @@ public class LinearProbbingHashTable<K, V> implements HashTable<K, V> {
         return value;
     }
 
+    @Override
+    public V remove(K key) {
+
+        int hashedKey = findSlotOccupiedByKey(key);
+
+        V v = null;
+
+        if (hashedKey != -1) {
+            v = hashtable[hashedKey].value;
+            hashtable[hashedKey] = null;
+        }
+
+        return v;
+    }
+
     private int findSlotOccupiedByKey(K key) {
 
         int hashkey = hashKey(key);
         int stopSlot = hashkey;
 
-        if (key.equals(hashtable[hashkey].key)) {
+        if (hashtable[hashkey] == null || !key.equals(hashtable[hashkey].key)) {
             hashkey = (hashkey + 1) % hashtable.length;
-            while (hashkey != stopSlot && !key.equals(hashtable[hashkey])) {
-                hashkey = (hashkey + 1) % hashtable.length;
+            boolean shouldContinuesearch = true;
+            while (hashkey != stopSlot && shouldContinuesearch) {
+                if (hashtable[hashkey] == null || !key.equals(hashtable[hashkey].key)) {
+                    hashkey = (hashkey + 1) % hashtable.length;
+                } else {
+                    shouldContinuesearch = false;
+                }
             }
 
             if (hashkey == stopSlot) {
