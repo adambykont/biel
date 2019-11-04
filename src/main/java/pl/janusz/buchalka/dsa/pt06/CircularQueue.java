@@ -1,5 +1,7 @@
 package pl.janusz.buchalka.dsa.pt06;
 
+import java.util.NoSuchElementException;
+
 /**
  * Created by Janusz Kacki on 03/11/2019. Project; bielmarcus
  */
@@ -57,7 +59,7 @@ public class CircularQueue<E> implements Queue<E> {
     public E remove() {
 
         if (size == 0) {
-            throw new IndexOutOfBoundsException();
+            throw new NoSuchElementException();
         }
 
         final E e = (E) array[head];
@@ -72,7 +74,7 @@ public class CircularQueue<E> implements Queue<E> {
     public E peek() {
 
         if (size == 0) {
-            throw new IndexOutOfBoundsException();
+            throw new NoSuchElementException();
         }
 
         return (E) array[head];

@@ -3,6 +3,8 @@ package pl.janusz.buchalka.dsa.pt06;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
@@ -15,6 +17,7 @@ public abstract class QueueTest {
     protected String b;
     protected String c;
     protected String d;
+    protected String e;
     protected Queue<String> queue;
 
     @Before
@@ -25,6 +28,7 @@ public abstract class QueueTest {
         b = "B";
         c = "C";
         d = "D";
+        e = "E";
     }
 
     protected abstract Queue<String> getQueue();
@@ -114,7 +118,7 @@ public abstract class QueueTest {
             queue.peek();
             fail();
         } catch (Exception e) {
-            assertThat(e, instanceOf(IndexOutOfBoundsException.class));
+            assertThat(e, instanceOf(NoSuchElementException.class));
         }
     }
 
@@ -125,7 +129,7 @@ public abstract class QueueTest {
             queue.remove();
             fail();
         } catch (Exception e) {
-            assertThat(e, instanceOf(IndexOutOfBoundsException.class));
+            assertThat(e, instanceOf(NoSuchElementException.class));
         }
     }
 
@@ -147,23 +151,43 @@ public abstract class QueueTest {
     }
 
     @Test
-    public void add4ElementsAndRemove4ElementsAThousandTimes() {
+    public void add5ElementsAndRemove4ElementsAThousandTimes() {
 
         for (int i = 0; i < 1000; i++) {
             queue.add(a);
             queue.add(b);
             queue.add(c);
             queue.add(d);
+            queue.add(e);
             assertThat(queue.remove(), is(a));
-            assertThat(queue.size(), is(3));
+            assertThat(queue.size(), is(4));
             assertThat(queue.remove(), is(b));
-            assertThat(queue.size(), is(2));
+            assertThat(queue.size(), is(3));
             assertThat(queue.remove(), is(c));
-            assertThat(queue.size(), is(1));
+            assertThat(queue.size(), is(2));
             assertThat(queue.remove(), is(d));
+            assertThat(queue.size(), is(1));
+            assertThat(queue.remove(), is(e));
             assertThat(queue.size(), is(0));
         }
 
         assertThat(queue.size(), is(0));
+    }
+
+    @Test
+    public void addRemoveFiveTimes() {
+
+        queue.add(a);
+        queue.add(b);
+        assertThat(queue.remove(), is(a));
+        queue.add(c);
+        assertThat(queue.remove(), is(b));
+        queue.add(d);
+        assertThat(queue.remove(), is(c));
+        queue.add(e);
+        assertThat(queue.remove(), is(d));
+        assertThat(queue.size(),is(1));
+        assertThat(queue.remove(),is(e));
+        assertThat(queue.size(),is(0));
     }
 }
