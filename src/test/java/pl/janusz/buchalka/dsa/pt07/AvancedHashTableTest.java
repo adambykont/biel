@@ -11,13 +11,8 @@ import static org.hamcrest.Matchers.*;
 /**
  * Created by Janusz Kacki on 04/11/2019. Project; bielmarcus
  */
-public class HashTableTestImplLinearProbbing extends HashTableTest {
+public abstract class AvancedHashTableTest extends HashTableTest {
 
-    @Override
-    protected HashTable<String, Employee> getHashTable() {
-
-        return new LinearProbbingHashTable<>();
-    }
 
     @Test
     public void putTwoElements() {
@@ -66,5 +61,44 @@ public class HashTableTestImplLinearProbbing extends HashTableTest {
         assertThat(hashTable.remove(tom.getFirstName()), is(tom));
         assertThat(hashTable.remove(pluto.getFirstName()), is(pluto));
         assertThat(hashTable.remove(jerry.getFirstName()), is(jerry));
+    }
+
+    @Test
+    public void putEightitems() {
+
+        hashTable.put(pixie.getFirstName(), pixie);
+        assertThat(hashTable.size(), is(1));
+        hashTable.put(dixie.getFirstName(), dixie);
+        assertThat(hashTable.size(), is(2));
+        hashTable.put(jinks.getFirstName(), jinks);
+        assertThat(hashTable.size(), is(3));
+        hashTable.put(felix.getFirstName(), felix);
+        assertThat(hashTable.size(), is(4));
+        hashTable.put(pluto.getFirstName(), pluto);
+        assertThat(hashTable.size(), is(5));
+        hashTable.put(dino.getFirstName(), dino);
+        assertThat(hashTable.size(), is(6));
+        hashTable.put(tom.getFirstName(), tom);
+        assertThat(hashTable.size(), is(7));
+        hashTable.put(jerry.getFirstName(), jerry);
+        assertThat(hashTable.size(), is(8));
+
+        assertThat(hashTable.remove(pixie.getFirstName()), is(pixie));
+        assertThat(hashTable.size(), is(7));
+        assertThat(hashTable.remove(dixie.getFirstName()), is(dixie));
+        assertThat(hashTable.size(), is(6));
+        assertThat(hashTable.remove(tom.getFirstName()), is(tom));
+        assertThat(hashTable.size(), is(5));
+        assertThat(hashTable.remove(dino.getFirstName()), is(dino));
+        assertThat(hashTable.size(), is(4));
+        assertThat(hashTable.remove(jerry.getFirstName()), is(jerry));
+        assertThat(hashTable.size(), is(3));
+        assertThat(hashTable.remove(jinks.getFirstName()), is(jinks));
+        assertThat(hashTable.size(), is(2));
+        assertThat(hashTable.remove(felix.getFirstName()), is(felix));
+        assertThat(hashTable.size(), is(1));
+        assertThat(hashTable.remove(pluto.getFirstName()), is(pluto));
+        assertThat(hashTable.size(), is(0));
+
     }
 }

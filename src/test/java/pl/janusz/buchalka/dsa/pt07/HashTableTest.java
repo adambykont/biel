@@ -46,6 +46,7 @@ public abstract class HashTableTest {
         hashTable.put(jinks.getFirstName(), jinks);
         final Employee employee = hashTable.get(jinks.getFirstName());
         assertThat(employee, is(jinks));
+        assertThat(hashTable.size(),is(1));
     }
 
     @Test
@@ -58,6 +59,7 @@ public abstract class HashTableTest {
         assertThat(employee, is(jinks));
         employee = hashTable.get(tom.getFirstName());
         assertThat(employee, is(tom));
+        assertThat(hashTable.size(),is(2));
     }
 
     @Test
@@ -66,6 +68,7 @@ public abstract class HashTableTest {
         hashTable.put(pixie.getFirstName(), pixie);
         Employee remove = hashTable.remove(pixie.getFirstName());
         assertThat(remove, is(pixie));
+        assertThat(hashTable.size(),is(0));
     }
 
     @Test
@@ -73,8 +76,10 @@ public abstract class HashTableTest {
 
         hashTable.put(pixie.getFirstName(), pixie);
         assertThat(hashTable.remove(pixie.getFirstName()), is(pixie));
+        assertThat(hashTable.size(),is(0));
         hashTable.put(dixie.getFirstName(), dixie);
         assertThat(hashTable.remove(dixie.getFirstName()), is(dixie));
+        assertThat(hashTable.size(),is(0));
     }
 
     @Test
@@ -91,9 +96,19 @@ public abstract class HashTableTest {
     }
 
     @Test
-    public void getnonExistingValueFromEmptyHashTableReturnsNull() {
+    public void getNonExistingValueFromEmptyHashTableReturnsNull() {
 
         assertThat(hashTable.get(pixie.getFirstName()), is(nullValue()));
+    }
 
+    @Test
+    public void removedEntryNotLongerpresent() {
+
+        hashTable.put(pixie.getFirstName(), pixie);
+        assertThat(hashTable.size(),is(1));
+        assertThat(hashTable.remove(pixie.getFirstName()), is(pixie));
+        assertThat(hashTable.size(),is(0));
+        assertThat(hashTable.get(pixie.getFirstName()), is(nullValue()));
+        assertThat(hashTable.size(),is(0));
     }
 }

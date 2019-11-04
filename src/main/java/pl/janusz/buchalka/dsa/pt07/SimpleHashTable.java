@@ -7,10 +7,12 @@ public class SimpleHashTable<K, V> implements HashTable<K, V> {
 
     private static final int INITIAL_CAPACITY = 4;
     private V[] hashtable;
+    private int size;
 
     public SimpleHashTable() {
 
         hashtable = (V[]) new Object[INITIAL_CAPACITY];
+        size = 0;
     }
 
     private int hashKey(K key) {
@@ -26,6 +28,8 @@ public class SimpleHashTable<K, V> implements HashTable<K, V> {
         if (hashtable[hashedKey] != null) {
             throw new ArrayIndexOutOfBoundsException();
         }
+
+        size++;
 
         hashtable[hashedKey] = value;
     }
@@ -43,7 +47,14 @@ public class SimpleHashTable<K, V> implements HashTable<K, V> {
 
         final V v = hashtable[hashKey(key)];
         hashtable[hashKey(key)] = null;
+        size--;
 
         return v;
+    }
+
+    @Override
+    public int size() {
+
+        return size;
     }
 }

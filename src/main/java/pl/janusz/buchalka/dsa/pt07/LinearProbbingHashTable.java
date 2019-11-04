@@ -6,11 +6,15 @@ package pl.janusz.buchalka.dsa.pt07;
 public class LinearProbbingHashTable<K, V> implements HashTable<K, V> {
 
     private static final int INITIAL_CAPACITY = 4;
+    private static final double LOAD_FACTOR = 0.75;
+    private int size;
+
     private Entry<K, V>[] hashtable;
 
     public LinearProbbingHashTable() {
 
         hashtable = new Entry[INITIAL_CAPACITY];
+        size = 0;
     }
 
     private int hashKey(K key) {
@@ -22,9 +26,29 @@ public class LinearProbbingHashTable<K, V> implements HashTable<K, V> {
 
     public void put(K key, V value) {
 
-        int hashedKey = getFirstAvailableSlotForKey(key);
+        if (size() / hashtable.length > LOAD_FACTOR) {
+            resizeHashTable();
+        }
 
+        int hashedKey = getFirstAvailableSlotForKey(key);
+        size++;
         hashtable[hashedKey] = new Entry<>(key, value);
+    }
+
+    private void resizeHashTable() {
+
+        final Entry<K, V>[] newEntries = new Entry[hashtable.length * 2];
+        final Entry<K, V>[] oldEntries = hashtable;
+
+        hashtable = newEntries;
+
+        size = 0;
+
+        for (Entry<K, V> entry : oldEntries) {
+            if (entry != null) {
+                put(entry.key, entry.value);
+            }
+        }
     }
 
     private int getFirstAvailableSlotForKey(K key) {
@@ -70,9 +94,16 @@ public class LinearProbbingHashTable<K, V> implements HashTable<K, V> {
         if (hashedKey != -1) {
             v = hashtable[hashedKey].value;
             hashtable[hashedKey] = null;
+            size--;
         }
 
         return v;
+    }
+
+    @Override
+    public int size() {
+
+        return size;
     }
 
     private int findSlotOccupiedByKey(K key) {
