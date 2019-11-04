@@ -64,7 +64,7 @@ public abstract class AvancedHashTableTest extends HashTableTest {
     }
 
     @Test
-    public void putEightitems() {
+    public void putEightItems() {
 
         hashTable.put(pixie.getFirstName(), pixie);
         assertThat(hashTable.size(), is(1));

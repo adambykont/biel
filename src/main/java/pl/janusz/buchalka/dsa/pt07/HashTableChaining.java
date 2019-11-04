@@ -22,6 +22,8 @@ public class HashTableChaining<K, V> implements HashTable<K, V> {
     @Override
     public void put(K key, V value) {
 
+        assureCapacity();
+
         int slot = hashKey(key);
 
         if (array[slot] == null) {
@@ -33,16 +35,65 @@ public class HashTableChaining<K, V> implements HashTable<K, V> {
         size++;
     }
 
+    private void assureCapacity() {
+
+        if (size() / array.length > LOAD_FACTOR) {
+            final List[] newArray = new List[INITIAL_CAPACITY * 2];
+            final List[] oldArray = array;
+            array = newArray;
+            size = 0;
+
+            for (List oldList : oldArray) {
+                if (oldList != null) {
+                    for (int i = 0; i < oldList.size(); i++) {
+                        Entry<K, V> entry = (Entry<K, V>) oldList.get(i);
+                        put(entry.key, entry.value);
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     public V get(K key) {
 
+        V val = null;
+        final int slot = hashKey(key);
+        if (array[slot] != null) {
+            Entry<K, V> entry = getEntryFromEntries(key, array[slot]);
+            if (entry != null) {
+                val = entry.value;
+            }
+        }
+
+        return val;
+    }
+
+    private Entry<K, V> getEntryFromEntries(K key, List<Entry<K, V>> entries) {
+
+        for (Entry<K, V> entry : entries) {
+            if (key.equals(entry.key)) {
+                return entry;
+            }
+        }
         return null;
     }
 
     @Override
     public V remove(K key) {
 
-        return null;
+        V val = null;
+        final int slot = hashKey(key);
+        if (array[slot] != null) {
+            Entry<K, V> entry = getEntryFromEntries(key, array[slot]);
+            if (entry != null) {
+                val = entry.value;
+                array[slot].remove(entry);
+                size--;
+            }
+        }
+
+        return val;
     }
 
     @Override

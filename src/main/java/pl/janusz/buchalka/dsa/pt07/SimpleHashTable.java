@@ -47,7 +47,9 @@ public class SimpleHashTable<K, V> implements HashTable<K, V> {
 
         final V v = hashtable[hashKey(key)];
         hashtable[hashKey(key)] = null;
-        size--;
+        if (v != null) {
+            size--;
+        }
 
         return v;
     }
