@@ -56,7 +56,7 @@ public abstract class BSTTest {
     }
 
     @Test
-    public void insertTwoelementsSecondToLeft() {
+    public void insertTwoElementsSecondToLeft() {
 
         tree.insert(5);
         tree.insert(3);
@@ -68,7 +68,7 @@ public abstract class BSTTest {
     }
 
     @Test
-    public void insertTwoelementsSecondToRight() {
+    public void insertTwoElementsSecondToRight() {
 
         tree.insert(5);
         tree.insert(7);
