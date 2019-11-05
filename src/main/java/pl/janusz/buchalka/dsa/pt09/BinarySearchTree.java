@@ -5,4 +5,12 @@ package pl.janusz.buchalka.dsa.pt09;
  */
 public class BinarySearchTree<E> {
 
+    private Node<E> root;
+
+    private class Node<E> {
+
+        private E element;
+        private Node<E> left;
+        private Node<E> right;
+    }
 }

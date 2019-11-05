@@ -1,5 +1,6 @@
 package pl.janusz.buchalka.dsa.pt09;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -11,4 +12,16 @@ import static org.hamcrest.Matchers.*;
  */
 public class BinarySearchTreeTest {
 
+    private BinarySearchTree<Integer> tree;
+
+    @Before
+    public void setUp() throws Exception {
+
+        tree = new BinarySearchTree<>();
+    }
+
+    @Test
+    public void emptyAtTheBeginning() {
+
+    }
 }
