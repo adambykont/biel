@@ -12,16 +12,5 @@ import static org.hamcrest.Matchers.*;
  */
 public class BinarySearchTreeTest {
 
-    private BinarySearchTree<Integer> tree;
 
-    @Before
-    public void setUp() throws Exception {
-
-        tree = new BinarySearchTree<>();
-    }
-
-    @Test
-    public void emptyAtTheBeginning() {
-
-    }
 }
