@@ -1,5 +1,9 @@
 package pl.janusz.buchalka.dsa.pt09;
 
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+
 /**
  * Created by Janusz Kacki on 05/11/2019. Project; bielmarcus
  */
@@ -55,6 +59,41 @@ public class BinarysearchTreeObjective<E extends Comparable<? super E>> implemen
         }
 
         return root.max();
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+
+        return new InOrderIterator<>();
+    }
+
+    @Override
+    public boolean isBST() {
+
+        return recCheckBST(root);
+    }
+
+    private boolean recCheckBST(Node<E> node) {
+
+        if (node == null) {
+            return true;
+        }
+
+        if (node.left != null && !(node.left.element.compareTo(node.element) < 0)) {
+            return false;
+        }
+        if (node.right != null && !(node.element.compareTo(node.right.element) < 0)) {
+            return false;
+        }
+
+        if (!recCheckBST(node.left)) {
+            return false;
+        }
+        if (!recCheckBST(node.right)) {
+            return false;
+        }
+
+        return true;
     }
 
     private class Node<E extends Comparable<? super E>> {
@@ -165,6 +204,40 @@ public class BinarysearchTreeObjective<E extends Comparable<? super E>> implemen
             } else {
                 return left;
             }
+        }
+    }
+
+    private class InOrderIterator<E extends Comparable<? super E>> implements Iterator<E> {
+
+        Deque<E> queue;
+
+        public InOrderIterator() {
+
+            queue = new LinkedList<>();
+            traverseInOrder((Node<E>) root);
+        }
+
+        private void traverseInOrder(Node<E> node) {
+
+            if (node == null) {
+                return;
+            }
+
+            traverseInOrder(node.left);
+            queue.add(node.element);
+            traverseInOrder(node.right);
+        }
+
+        @Override
+        public boolean hasNext() {
+
+            return !queue.isEmpty();
+        }
+
+        @Override
+        public E next() {
+
+            return queue.remove();
         }
     }
 }

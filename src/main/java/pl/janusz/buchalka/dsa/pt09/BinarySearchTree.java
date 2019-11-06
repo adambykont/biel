@@ -1,5 +1,9 @@
 package pl.janusz.buchalka.dsa.pt09;
 
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+
 /**
  * Created by Janusz Kacki on 05/11/2019. Project; bielmarcus
  */
@@ -10,35 +14,6 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements BST<E>
     @Override
     public void insert(E element) {
 
-//        if (contains(element)) {
-//            return;
-//        }
-//
-//        final Node<E> node = new Node<>(element);
-//
-//        if (root == null) {
-//            root = node;
-//        } else {
-//            Node<E> slider = root;
-//            while (true) {
-//                if (element.compareTo(slider.element) < 0) {
-//                    if (slider.left != null) {
-//                        slider = slider.left;
-//                    } else {
-//                        slider.left = node;
-//                        return;
-//                    }
-//                } else {
-//                    if (slider.right != null) {
-//                        slider = slider.right;
-//                    } else {
-//                        slider.right = node;
-//                        return;
-//                    }
-//                }
-//            }
-//        }
-
         root = ins(root, element);
     }
 
@@ -48,6 +23,10 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements BST<E>
 
         if (node == null) {
             return newOne;
+        }
+
+        if (key.compareTo(node.element) == 0) {
+            return node;
         }
 
         if (key.compareTo(node.element) < 0) {
@@ -89,7 +68,7 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements BST<E>
 
         if (node.left != null && node.right != null) {
 
-            final E min = minInSubtree(node);
+            final E min = maxInSubtree(node.left);
             node.element = min;
             node.left = del(node.left, min);
 
@@ -103,11 +82,11 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements BST<E>
         }
     }
 
-    private E minInSubtree(Node<E> node) {
+    private E maxInSubtree(Node<E> node) {
 
         Node<E> slider = node;
-        while (slider.left != null) {
-            slider = slider.left;
+        while (slider.right != null) {
+            slider = slider.right;
         }
 
         return slider.element;
@@ -167,7 +146,42 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements BST<E>
         return slider.element;
     }
 
-    private class Node<E> {
+    @Override
+    public Iterator<E> iterator() {
+
+        return new InOrderIterator<E>();
+    }
+
+    @Override
+    public boolean isBST() {
+
+        return recCheckBST(root);
+    }
+
+    private boolean recCheckBST(Node<E> node) {
+
+        if (node == null) {
+            return true;
+        }
+
+        if (node.left != null && !(node.left.element.compareTo(node.element) < 0)) {
+            return false;
+        }
+        if (node.right != null && !(node.element.compareTo(node.right.element) < 0)) {
+            return false;
+        }
+
+        if (!recCheckBST(node.left)) {
+            return false;
+        }
+        if (!recCheckBST(node.right)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private class Node<E extends Comparable<? super E>> {
 
         private E element;
         private Node<E> left;
@@ -176,6 +190,40 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements BST<E>
         public Node(E element) {
 
             this.element = element;
+        }
+    }
+
+    private class InOrderIterator<E extends Comparable<? super E>> implements Iterator<E> {
+
+        Deque<E> queue;
+
+        public InOrderIterator() {
+
+            queue = new LinkedList<>();
+            traverseInOrder((Node<E>) root);
+        }
+
+        private void traverseInOrder(Node<E> node) {
+
+            if (node == null) {
+                return;
+            }
+
+            traverseInOrder(node.left);
+            queue.add(node.element);
+            traverseInOrder(node.right);
+        }
+
+        @Override
+        public boolean hasNext() {
+
+            return !queue.isEmpty();
+        }
+
+        @Override
+        public E next() {
+
+            return queue.remove();
         }
     }
 }
