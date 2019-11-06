@@ -60,13 +60,13 @@ public class BinarysearchTreePseudoRec<E extends Comparable<? super E>> implemen
 
         private void insert(E element) {
 
-            if (element.compareTo(element) == 0) {
+            if (element.compareTo(this.element) == 0) {
                 return;
             }
 
             final Node<E> node = new Node<>(element);
 
-            if (element.compareTo(element) < 0) {
+            if (element.compareTo(this.element) < 0) {
                 if (left != null) {
                     left.insert(element);
                 } else {
@@ -86,6 +86,7 @@ public class BinarysearchTreePseudoRec<E extends Comparable<? super E>> implemen
             if (element.compareTo(this.element) == 0) {
                 return true;
             }
+
             if (element.compareTo(this.element) < 0) {
                 if (left != null) {
                     return left.contains(element);
