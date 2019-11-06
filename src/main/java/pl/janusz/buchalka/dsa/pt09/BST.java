@@ -7,6 +7,8 @@ public interface BST<E extends Comparable<? super E>> {
 
     void insert(E element);
 
+    void delete(E element);
+
     boolean contains(E element);
 
     E min();

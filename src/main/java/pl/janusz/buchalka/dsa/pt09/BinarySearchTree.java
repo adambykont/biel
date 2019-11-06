@@ -10,34 +10,107 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements BST<E>
     @Override
     public void insert(E element) {
 
-        if (contains(element)) {
-            return;
+//        if (contains(element)) {
+//            return;
+//        }
+//
+//        final Node<E> node = new Node<>(element);
+//
+//        if (root == null) {
+//            root = node;
+//        } else {
+//            Node<E> slider = root;
+//            while (true) {
+//                if (element.compareTo(slider.element) < 0) {
+//                    if (slider.left != null) {
+//                        slider = slider.left;
+//                    } else {
+//                        slider.left = node;
+//                        return;
+//                    }
+//                } else {
+//                    if (slider.right != null) {
+//                        slider = slider.right;
+//                    } else {
+//                        slider.right = node;
+//                        return;
+//                    }
+//                }
+//            }
+//        }
+
+        root = ins(root, element);
+    }
+
+    private Node<E> ins(Node<E> node, E key) {
+
+        final Node<E> newOne = new Node<>(key);
+
+        if (node == null) {
+            return newOne;
         }
 
-        final Node<E> node = new Node<>(element);
-
-        if (root == null) {
-            root = node;
+        if (key.compareTo(node.element) < 0) {
+            node.left = ins(node.left, key);
         } else {
-            Node<E> slider = root;
-            while (true) {
-                if (element.compareTo(slider.element) < 0) {
-                    if (slider.left != null) {
-                        slider = slider.left;
-                    } else {
-                        slider.left = node;
-                        return;
-                    }
-                } else {
-                    if (slider.right != null) {
-                        slider = slider.right;
-                    } else {
-                        slider.right = node;
-                        return;
-                    }
-                }
-            }
+            node.right = ins(node.right, key);
         }
+
+        return node;
+    }
+
+    @Override
+    public void delete(E element) {
+
+        root = del(root, element);
+    }
+
+    private Node<E> del(Node<E> node, E key) {
+
+        if (node == null) {
+            return null;
+        }
+
+        if (key.compareTo(node.element) < 0) {
+            node.left = del(node.left, key);
+
+            return node;
+        }
+
+        if (key.compareTo(node.element) > 0) {
+            node.right = del(node.right, key);
+
+            return node;
+        }
+
+        if (node.left == null && node.right == null) {
+            return null;
+        }
+
+        if (node.left != null && node.right != null) {
+
+            final E min = minInSubtree(node);
+            node.element = min;
+            node.left = del(node.left, min);
+
+            return node;
+        }
+
+        if (node.left == null) {
+            return node.right;
+        } else {
+            return node.left;
+        }
+    }
+
+    private E minInSubtree(Node<E> node) {
+
+        Node<E> slider = node;
+        while (slider.left != null) {
+            slider = slider.left;
+        }
+
+        return slider.element;
     }
 
     @Override

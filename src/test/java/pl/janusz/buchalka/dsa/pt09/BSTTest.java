@@ -166,4 +166,146 @@ public abstract class BSTTest {
 
         assertThat(tree.max(), is(17));
     }
+
+    @Test
+    public void deleteFromEmptyTree() {
+
+        assertThat(tree.contains(1), is(false));
+        tree.delete(1);
+        assertThat(tree.contains(1), is(false));
+    }
+
+    @Test
+    public void deleteFromOneElementTree() {
+
+        tree.insert(1);
+        assertThat(tree.contains(1), is(true));
+        tree.delete(1);
+        assertThat(tree.contains(1), is(false));
+    }
+
+    @Test
+    public void deleteParentFromTwoElementsTreeChildonleft() {
+
+        tree.insert(2);
+        tree.insert(1);
+        assertThat(tree.contains(1), is(true));
+        assertThat(tree.contains(2), is(true));
+        tree.delete(2);
+        assertThat(tree.contains(2), is(false));
+        assertThat(tree.contains(1), is(true));
+    }
+
+    @Test
+    public void deleteParentFromTwoElementsTreeChildOnRight() {
+
+        tree.insert(2);
+        tree.insert(3);
+        assertThat(tree.contains(3), is(true));
+        assertThat(tree.contains(2), is(true));
+        tree.delete(2);
+        assertThat(tree.contains(2), is(false));
+        assertThat(tree.contains(3), is(true));
+    }
+
+    @Test
+    public void deleteParentFromThreeElementsTreeChildOnRightAndLeft() {
+
+        tree.insert(2);
+        tree.insert(3);
+        tree.insert(1);
+        assertThat(tree.contains(3), is(true));
+        assertThat(tree.contains(2), is(true));
+        assertThat(tree.contains(1), is(true));
+        tree.delete(2);
+        assertThat(tree.contains(2), is(false));
+        assertThat(tree.contains(1), is(true));
+        assertThat(tree.contains(3), is(true));
+    }
+
+    @Test
+    public void deleteLeftChildFromThreeElementsTreeChildOnRightAndLeft() {
+
+        tree.insert(2);
+        tree.insert(3);
+        tree.insert(1);
+        assertThat(tree.contains(3), is(true));
+        assertThat(tree.contains(2), is(true));
+        assertThat(tree.contains(1), is(true));
+        tree.delete(1);
+        assertThat(tree.contains(1), is(false));
+        assertThat(tree.contains(2), is(true));
+        assertThat(tree.contains(3), is(true));
+    }
+
+    @Test
+    public void deleteRigftChildFromThreeElementsTreeChildOnRight() {
+
+        tree.insert(5);
+        tree.insert(1);
+        tree.insert(10);
+        tree.insert(12);
+        assertThat(tree.contains(5), is(true));
+        assertThat(tree.contains(1), is(true));
+        assertThat(tree.contains(10), is(true));
+        assertThat(tree.contains(12), is(true));
+        tree.delete(10);
+        assertThat(tree.contains(5), is(true));
+        assertThat(tree.contains(1), is(true));
+        assertThat(tree.contains(12), is(true));
+    }
+
+    @Test
+    public void deleteRigftChildFromThreeElementsTreeChildOnLeft() {
+
+        tree.insert(5);
+        tree.insert(1);
+        tree.insert(10);
+        tree.insert(7);
+        assertThat(tree.contains(5), is(true));
+        assertThat(tree.contains(1), is(true));
+        assertThat(tree.contains(10), is(true));
+        assertThat(tree.contains(7), is(true));
+        tree.delete(10);
+        assertThat(tree.contains(5), is(true));
+        assertThat(tree.contains(1), is(true));
+        assertThat(tree.contains(7), is(true));
+    }
+
+    @Test
+    public void deleteRigftChildFromThreeElementsTreeChildOnLeftAndRight() {
+
+        tree.insert(5);
+        tree.insert(1);
+        tree.insert(10);
+        tree.insert(7);
+        tree.insert(12);
+        assertThat(tree.contains(5), is(true));
+        assertThat(tree.contains(1), is(true));
+        assertThat(tree.contains(10), is(true));
+        assertThat(tree.contains(7), is(true));
+        assertThat(tree.contains(12), is(true));
+        tree.delete(10);
+        assertThat(tree.contains(5), is(true));
+        assertThat(tree.contains(1), is(true));
+        assertThat(tree.contains(7), is(true));
+        assertThat(tree.contains(12), is(true));
+    }
+
+    @Test
+    public void deleteAllNumbersFromBiggerTree() {
+
+        for (Integer number : numbers) {
+            tree.insert(number);
+        }
+
+        for (Integer number : numbers) {
+            assertThat(tree.contains(number), is(true));
+        }
+
+        for (Integer number : numbers) {
+            tree.delete(number);
+            assertThat(tree.contains(number), is(false));
+        }
+    }
 }

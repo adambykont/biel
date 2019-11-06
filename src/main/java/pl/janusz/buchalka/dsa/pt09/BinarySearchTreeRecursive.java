@@ -18,6 +18,47 @@ public class BinarySearchTreeRecursive<E extends Comparable<? super E>> implemen
     }
 
     @Override
+    public void delete(E element) {
+
+        root = deleteRec(root, element);
+    }
+
+    private Node<E> deleteRec(Node<E> node, E key) {
+
+        if (node == null) {
+            return null;
+        }
+
+        if (key.compareTo(node.element) != 0) {
+            if (key.compareTo(node.element) < 0) {
+                node.left = deleteRec(node.left, key);
+            } else {
+                node.right = deleteRec(node.right, key);
+            }
+
+            return node;
+        }
+
+        if (node.left == null && node.right == null) {
+            return null;
+        }
+
+        if (node.left != null && node.right != null) {
+            final E minElement = recMin(node.left);
+            node.element = minElement;
+            node.left = deleteRec(node.left, minElement);
+
+            return node;
+        }
+
+        if (node.left == null) {
+            return node.right;
+        }
+
+        return node.left;
+    }
+
+    @Override
     public boolean contains(E element) {
 
         return findRec(root, element);

@@ -3,7 +3,7 @@ package pl.janusz.buchalka.dsa.pt09;
 /**
  * Created by Janusz Kacki on 05/11/2019. Project; bielmarcus
  */
-public class BinarysearchTreePseudoRec<E extends Comparable<? super E>> implements BST<E> {
+public class BinarysearchTreeObjective<E extends Comparable<? super E>> implements BST<E> {
 
     private Node<E> root;
 
@@ -15,6 +15,16 @@ public class BinarysearchTreePseudoRec<E extends Comparable<? super E>> implemen
         } else {
             root.insert(element);
         }
+    }
+
+    @Override
+    public void delete(E element) {
+
+        if (root == null) {
+            return;
+        }
+
+        root = root.delete(element);
     }
 
     @Override
@@ -118,6 +128,43 @@ public class BinarysearchTreePseudoRec<E extends Comparable<? super E>> implemen
             }
 
             return right.max();
+        }
+
+        public Node<E> delete(E key) {
+
+            if (key.compareTo(this.element) < 0) {
+                if (left != null) {
+                    left = left.delete(key);
+                }
+
+                return this;
+            }
+
+            if (key.compareTo(this.element) > 0) {
+                if (right != null) {
+                    right = right.delete(key);
+                }
+
+                return this;
+            }
+
+            if (left == null && right == null) {
+                return null;
+            }
+
+            if (left != null && right != null) {
+                final E max = left.max();
+                this.element = max;
+                left = left.delete(max);
+
+                return this;
+            }
+
+            if (left == null) {
+                return right;
+            } else {
+                return left;
+            }
         }
     }
 }
