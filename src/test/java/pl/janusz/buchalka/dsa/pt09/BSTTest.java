@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
@@ -494,6 +495,26 @@ public abstract class BSTTest {
         for (Integer number : numbers) {
             tree.insert(number);
             assertThat(tree.isBST(), is(true));
+        }
+    }
+
+    @Test
+    public void bstAndTreeSet() {
+
+        final TreeSet<Integer> treeSet = new TreeSet<>();
+
+        for (int i = 0; i < 1000; i++) {
+            final int anInt = ThreadLocalRandom.current().nextInt(50);
+            tree.insert(anInt);
+            treeSet.add(anInt);
+        }
+
+        while (!treeSet.isEmpty()) {
+            final Integer min = tree.min();
+            assertThat(tree.contains(min), is(true));
+            tree.delete(min);
+            assertThat(tree.contains(min), is(false));
+            treeSet.remove(min);
         }
     }
 }
